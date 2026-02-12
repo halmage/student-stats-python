@@ -5,7 +5,8 @@ class EstudianteTable:
     """Clase EstudianteTable"""
 
     def __init__(self):
-        self.conexion = sqlite3.connect("app/Models/colegio.db")
+        with sqlite3.connect("app/Models/colegio.db") as conexion:
+            self.conexion = conexion
 
     def crear_tabla_estudiantes(self):
         """
