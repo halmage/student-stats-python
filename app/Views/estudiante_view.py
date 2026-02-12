@@ -16,7 +16,7 @@ from app.Controllers.EstudianteController import EstudianteController
 from app.package.Validaciones import Validaciones
 
 
-def registro_de_datos() -> None:
+def registro_de_datos() -> dict | None:
     """
     Ingreso de datos por el usuario
 
@@ -161,6 +161,9 @@ def tabla_informacion_estudiante(
         datos (dict | list): Datos del estudiante
         text (str): Texto que se muestra en la tabla
         rango_busqueda (bool): Indica si se muestra un solo estudiante (True) o todos (False)
+
+    Returns:
+        None
     """
     # Muestra el estudiante
     console = Console()
@@ -198,6 +201,9 @@ def tabla_informacion_estudiante(
 def mostrar_estudiante() -> None:
     """
     Mostrar estudiantes
+
+    Returns:
+        None
     """
     while True:
         # Limpieza de la consola
@@ -238,6 +244,9 @@ def mostrar_estudiante() -> None:
 def mostrar_estudiantes() -> None:
     """
     Mostrar todos los estudiantes de la tabla 'estudiantes'
+
+    Returns:
+        None
     """
     while True:
         # Limpieza de la consola
@@ -267,6 +276,9 @@ def mostrar_estudiantes() -> None:
 def mostrar_estudiantes_masculino() -> None:
     """
     Muestra todos los estudiantes masculinos
+
+    Returns:
+        None
     """
     while True:
         # Limpieza de la consola
@@ -296,6 +308,9 @@ def mostrar_estudiantes_masculino() -> None:
 def mostrar_estudiantes_femenino() -> None:
     """
     Muestra todos los estudiantes femeninos
+
+    Returns:
+        None
     """
     while True:
         # Limpieza de la consola
@@ -325,6 +340,9 @@ def mostrar_estudiantes_femenino() -> None:
 def mostrar_estudiantes_aprobados() -> None:
     """
     Muestra los estudiantes aprobados
+
+    Returns:
+        None
     """
     while True:
         # Limpieza de la consola
@@ -354,6 +372,9 @@ def mostrar_estudiantes_aprobados() -> None:
 def mostrar_estudiantes_reprobados() -> None:
     """
     Muestra los estudiantes reprobados
+
+    Returns:
+        None
     """
     while True:
         # Limpieza de la consola
@@ -383,6 +404,9 @@ def mostrar_estudiantes_reprobados() -> None:
 def eliminar_estudiante() -> None:
     """
     Elimina un estudiante de la tabla 'estudiantes'
+
+    Returns:
+        None
     """
     while True:
         # Limpieza de la consola
@@ -432,6 +456,9 @@ def eliminar_estudiante() -> None:
 def menu_mostrar_estudiantes() -> int:
     """
     Menu para mostrar estudiantes
+
+    Returns:
+        int: opcion seleccionada
     """
     # Limpieza de la consola
     os.system("clear")
@@ -466,6 +493,9 @@ def menu_mostrar_estudiantes() -> int:
 def mostrar_datos_estudiantes() -> None:
     """
     Muestra los datos de los estudiantes
+
+    Returns:
+        None
     """
     while True:
         # Limpieza de la consola
@@ -494,6 +524,9 @@ def mostrar_datos_estudiantes() -> None:
 def menu_estudiante() -> int:
     """
     Menu principal del estudiante
+
+    Returns:
+        int: opcion seleccionada
     """
     opcion = 0
     while opcion not in (1, 2, 3, 4, 5):
@@ -525,6 +558,9 @@ def menu_estudiante() -> int:
 def main() -> None:
     """
     Funcion principal del programa de la vista del estudiante
+
+    Returns:
+        None
     """
     while True:
         # Limpieza de la consola

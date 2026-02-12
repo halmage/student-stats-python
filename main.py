@@ -18,8 +18,10 @@ os.system("clear")
 
 
 def menu() -> int:
-    """
-    Menu principal del programa
+    """Menu de opciones del sistema
+
+    Returns:
+        int: opcion seleccionada
     """
     opcion = 0
     while opcion not in (1, 2, 3, 4):

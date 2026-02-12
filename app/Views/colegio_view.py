@@ -69,6 +69,9 @@ def visualizar_estadisticas_de_estudiantes() -> None:
 def menu_colegio() -> int:
     """
     Menu principal del estudiante
+
+    Returns:
+        int: opcion seleccionada
     """
     opcion = 0
     while opcion not in (1, 2):

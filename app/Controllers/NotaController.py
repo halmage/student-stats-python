@@ -14,7 +14,11 @@ class NotaController:
         self.nota = nota
 
     def evaluacion(self) -> str:
-        """Evaluacion de la nota"""
+        """Evaluacion de la nota
+
+        Returns:
+            str: evaluacion de la nota
+        """
         if self.nota >= 5 and self.nota <= 7:
             return "Aprobado"
         elif self.nota > 7:

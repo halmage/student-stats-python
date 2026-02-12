@@ -1,3 +1,7 @@
+"""
+Tabla EstudianteTable: tabla de base de datos para el control de estudiantes
+"""
+
 import sqlite3
 
 
@@ -8,10 +12,13 @@ class EstudianteTable:
         with sqlite3.connect("app/Models/colegio.db") as conexion:
             self.conexion = conexion
 
-    def crear_tabla_estudiantes(self):
+    def crear_tabla_estudiantes(self) -> bool:
         """
         Crear la tabla 'estudiantes'
         con los campos id, cedula, nombre, edad, genero, curso y nota
+
+        Returns:
+            bool: True si la tabla fue creada, False si ya existe
         """
         try:
             self.conexion.execute(
@@ -32,7 +39,7 @@ class EstudianteTable:
             self.conexion.close()
             return False
 
-    def crear_estudiante(self, **kwargs):
+    def crear_estudiante(self, **kwargs) -> None:
         """
         Insertar un estudiante en la tabla 'estudiantes'
 
@@ -63,7 +70,7 @@ class EstudianteTable:
         except sqlite3.OperationalError:
             self.conexion.close()
 
-    def buscar_estudiante(self, cedula: str):
+    def buscar_estudiante(self, cedula: str) -> tuple:
         """
         Buscar un estudiante en la tabla 'estudiantes'
 
@@ -82,9 +89,12 @@ class EstudianteTable:
         except sqlite3.OperationalError:
             self.conexion.close()
 
-    def mostrar_estudiantes(self):
+    def mostrar_estudiantes(self) -> list:
         """
         Mostrar todos los estudiantes de la tabla 'estudiantes'
+
+        Returns:
+            list: lista de estudiantes
         """
         try:
             cursor = self.conexion.execute(
@@ -97,7 +107,7 @@ class EstudianteTable:
         except sqlite3.OperationalError:
             self.conexion.close()
 
-    def eliminar_estudiante(self, cedula: str):
+    def eliminar_estudiante(self, cedula: str) -> None:
         """
         Eliminar un estudiante de la tabla 'estudiantes'
 
