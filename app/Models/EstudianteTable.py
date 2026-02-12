@@ -7,9 +7,9 @@ class EstudianteTable:
     def __init__(self):
         self.conexion = sqlite3.connect("app/Models/colegio.db")
 
-    def create_database(self):
+    def crear_tabla_estudiantes(self):
         """
-        Crear la base de datos si no existe y crear la tabla 'estudiantes'
+        Crear la tabla 'estudiantes'
         con los campos id, cedula, nombre, edad, genero, curso y nota
         """
         try:
@@ -26,8 +26,10 @@ class EstudianteTable:
                                 )"""
             )
             self.conexion.close()
+            return True
         except sqlite3.OperationalError:
             self.conexion.close()
+            return False
 
     def crear_estudiante(self, **kwargs):
         """

@@ -29,6 +29,16 @@ class EstudianteController(PersonaController, NotaController):
         PersonaController.__init__(self, cedula, nombre, edad, genero)
         NotaController.__init__(self, curso, nota)
 
+    def crear_tabla_estudiantes(self) -> None:
+        """
+        Crea la tabla de estudiantes
+        """
+        estudiante = EstudianteTable()
+        if estudiante.crear_tabla_estudiantes():
+            return "Tabla creada exitosamente"
+        else:
+            return "La tabla ya existe"
+
     def crear_estudiante(self) -> None:
         """
         Ingresa un estudiante a la base de datos
