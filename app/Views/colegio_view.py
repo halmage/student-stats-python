@@ -8,7 +8,7 @@ import os
 from rich.console import Console
 from rich.table import Table
 
-from app.Controllers.EstudianteController import EstudianteController
+from app.Controllers.estadistica_controller import EstadisticaController
 
 
 def visualizar_estadisticas_de_estudiantes() -> None:
@@ -19,7 +19,7 @@ def visualizar_estadisticas_de_estudiantes() -> None:
     # Limpieza de la consola
     os.system("clear")
 
-    estudiante = EstudianteController()
+    estudiante = EstadisticaController()
 
     # Suma total de todos los de estudiantes del colegio
     total_estudiantes: int = estudiante.cantidad_estudiantes()

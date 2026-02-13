@@ -8,7 +8,7 @@ Descripcion: Cuerpo principal del programa
 import os
 
 # Importacion de vistas
-from app.Controllers.EstudianteController import EstudianteController
+from app.Controllers.estudiante_controller import EstudianteController
 from app.Views.estudiante_view import main as menu_estudiante
 from app.Views.colegio_view import main as menu_colegio
 

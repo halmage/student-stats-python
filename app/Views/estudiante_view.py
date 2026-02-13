@@ -10,10 +10,11 @@ from rich.console import Console
 from rich.table import Table
 
 # Importacion de controladores
-from app.Controllers.EstudianteController import EstudianteController
+from app.Controllers.estudiante_controller import EstudianteController
+from app.Controllers.estadistica_controller import EstadisticaController
 
 # Importacion de validaciones
-from app.package.Validaciones import Validaciones
+from app.package.validaciones import Validaciones
 
 
 def registro_de_datos() -> dict | None:
@@ -38,13 +39,16 @@ def registro_de_datos() -> dict | None:
             cedula = input("\nIngrese cedula: ")
             validar_cedula = estudiante.validar_cedula(cedula)
 
-            if validar_cedula:
+            if validar_cedula or estudiante.buscar_estudiante(cedula):
                 # Muestra error si la cedula no es un numero positivo de 8 digitos
-                print(f"\n{validar_cedula}")
-                if validar_cedula == "Error: La cedula ya existe":
+
+                if validar_cedula is None:
+                    print("\nError: La cedula ya existe")
                     continuar = Validaciones().continuar_operacion()
                     if not continuar:
                         break
+                else:
+                    print(f"\n{validar_cedula}")
             else:
                 break
         if not continuar:
@@ -258,10 +262,10 @@ def mostrar_estudiantes() -> None:
         print("** mostrar estudiantes **".upper())
 
         # Llama a la clase estudiante
-        estudiante = EstudianteController()
+        estudiantes = EstudianteController()
 
         # Muestra todos los estudiantes
-        datos_estudiantes = estudiante.mostrar_estudiantes()
+        datos_estudiantes = estudiantes.mostrar_estudiantes()
 
         if datos_estudiantes:
             # Limpieza de la consola
@@ -290,10 +294,10 @@ def mostrar_estudiantes_masculino() -> None:
         print("** mostrar estudiantes masculinos **".upper())
 
         # Llama a la clase estudiante
-        estudiante = EstudianteController()
+        estudiantes = EstadisticaController()
 
         # Muestra todos los estudiantes masculinos
-        datos_estudiantes = estudiante.estudiantes_masculino()
+        datos_estudiantes = estudiantes.estudiantes_masculino()
 
         if datos_estudiantes:
             # Limpieza de la consola
@@ -322,10 +326,10 @@ def mostrar_estudiantes_femenino() -> None:
         print("** mostrar estudiantes femeninos **".upper())
 
         # Llama a la clase estudiante
-        estudiante = EstudianteController()
+        estudiantes = EstadisticaController()
 
         # Muestra todos los estudiantes femeninos
-        datos_estudiantes = estudiante.estudiantes_femenino()
+        datos_estudiantes = estudiantes.estudiantes_femenino()
 
         if datos_estudiantes:
             # Limpieza de la consola
@@ -354,10 +358,10 @@ def mostrar_estudiantes_aprobados() -> None:
         print("** mostrar estudiantes aprobados **".upper())
 
         # Llama a la clase estudiante
-        estudiante = EstudianteController()
+        estudiantes = EstadisticaController()
 
         # Muestra todos los estudiantes aprobados
-        datos_estudiantes = estudiante.estudiantes_aprobados()
+        datos_estudiantes = estudiantes.estudiantes_aprobados()
 
         if datos_estudiantes:
             # Limpieza de la consola
@@ -386,10 +390,10 @@ def mostrar_estudiantes_reprobados() -> None:
         print("** mostrar estudiantes reprobados **".upper())
 
         # Llama a la clase estudiante
-        estudiante = EstudianteController()
+        estudiantes = EstadisticaController()
 
         # Muestra todos los estudiantes reprobados
-        datos_estudiantes = estudiante.estudiantes_reprobados()
+        datos_estudiantes = estudiantes.estudiantes_reprobados()
 
         if datos_estudiantes:
             # Limpieza de la consola
@@ -411,46 +415,48 @@ def eliminar_estudiante() -> None:
     Returns:
         None
     """
+    # Ingreso de la cedula del estudiante
+    cedula: str = ""
+    validar_cedula = ""
     while True:
         # Limpieza de la consola
         os.system("clear")
 
         print("** eliminar estudiante **".upper())
+        # Validando si el cedula es un numero positivo
+        cedula = input("\nIngrese cedula: ")
+        estudiante = EstudianteController()
+        validar_cedula: str = estudiante.validar_cedula(cedula)
 
-        # Ingreso de la cedula del estudiante
-        cedula: str = ""
-        while not cedula.isdigit() or int(cedula) < 0 or len(cedula) not in [8]:
-            # Validando si el cedula es un numero positivo
-            cedula = input("\nIngrese cedula: ")
+        if validar_cedula:
+            print(f"\n{validar_cedula}")
+            input("\nPresione enter para continuar...")
+            continue
 
-            if not cedula.isdigit() or int(cedula) < 0 or len(cedula) not in [8]:
-                print("\nError: el dato tiene que ser un numero positivo de 8 digitos")
+        # Muestra el estudiante en caso de que exista
+        datos_estudiante = estudiante.mostrar_estudiante(cedula)
+        if datos_estudiante:
+            # Limpieza de la consola
+            os.system("clear")
+            # Muestra el estudiante
+            text = "Datos del estudiante"
+            tabla_informacion_estudiante(datos_estudiante, text, True)
 
-            # Llama a la clase estudiante
-            estudiante = EstudianteController()
-
-            # Muestra el estudiante en caso de que exista
-            datos_estudiante = estudiante.mostrar_estudiante(cedula)
-
-            if datos_estudiante:
+            print("\n** Aviso: Se eliminara el estudiante **")
+            # Pregunta si desea eliminar el estudiante
+            continuar = Validaciones().continuar_eliminar()
+            if continuar:
+                # Elimina el estudiante en caso de que exista
+                estudiante.eliminar_estudiante(cedula)
                 # Limpieza de la consola
                 os.system("clear")
-                # Muestra el estudiante
-                text = "Datos del estudiante"
-                tabla_informacion_estudiante(datos_estudiante, text, True)
-
-                print("\n** Aviso: Se eliminara el estudiante **")
-                # Pregunta si desea eliminar el estudiante
-                continuar = Validaciones().continuar_eliminar()
-                if continuar:
-                    # Elimina el estudiante en caso de que exista
-                    estudiante.eliminar_estudiante(cedula)
-
-                    print("\n** Estudiante eliminado exitosamente **")
-            else:
-                print("\n** No se encontro el estudiante **")
-
-        # Pregunta si desea eliminar otro estudiante
+                print("** Estudiante eliminado exitosamente **")
+                input("\nPresione enter para continuar...")
+                break
+            # Salir de la operacion eliminar estudiante
+            break
+        print("\n** No se encontro el estudiante **")
+        # Pregunta si desea buscar otro estudiante
         continuar = Validaciones().continuar_operacion()
         if not continuar:
             break

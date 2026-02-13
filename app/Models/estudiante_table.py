@@ -74,7 +74,8 @@ class EstudianteTable:
         try:
             self.conexion.execute(
                 """
-                insert into estudiantes (cedula, nombre, edad, genero, curso, nota) values (?, ?, ?, ?, ?, ?)
+                insert into estudiantes (cedula, nombre, edad, genero, curso, nota)
+                values (?, ?, ?, ?, ?, ?)
                 """,
                 (
                     kwargs["cedula"],
