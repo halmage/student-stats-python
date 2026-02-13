@@ -24,46 +24,49 @@ def visualizar_estadisticas_de_estudiantes() -> None:
     # Suma total de todos los de estudiantes del colegio
     total_estudiantes: int = estudiante.cantidad_estudiantes()
 
-    # Lista de estudiantes masculinos
-    estudiantes_masculino: int = len(estudiante.estudiantes_masculino())
+    if total_estudiantes > 0:
+        # Lista de estudiantes masculinos
+        estudiantes_masculino: int = len(estudiante.estudiantes_masculino())
 
-    # Lista de estudiantes femeninos
-    estudiantes_femenino: int = len(estudiante.estudiantes_femenino())
+        # Lista de estudiantes femeninos
+        estudiantes_femenino: int = len(estudiante.estudiantes_femenino())
 
-    # Porcentaje de estudiantes masculinos
-    porcentaje_em: float = round(estudiante.porcentaje_estudiantes_masculinos(), 2)
+        # Porcentaje de estudiantes masculinos
+        porcentaje_em: float = round(estudiante.porcentaje_estudiantes_masculinos(), 2)
 
-    # Porcentaje de estudiantes femeninos
-    porcentaje_ef: float = round(estudiante.porcentaje_estudiantes_femeninos(), 2)
+        # Porcentaje de estudiantes femeninos
+        porcentaje_ef: float = round(estudiante.porcentaje_estudiantes_femeninos(), 2)
 
-    # Porcentaje total de estudiantes en el colegio
-    porcentaje_total_estudiantes: float = estudiante.porcentaje_total_estudiantes()
+        # Porcentaje total de estudiantes en el colegio
+        porcentaje_total_estudiantes: float = estudiante.porcentaje_total_estudiantes()
 
-    # Objeto para imprimir tabla
-    console = Console()
+        # Objeto para imprimir tabla
+        console = Console()
 
-    # Salto de linea
-    print("\n")
+        # Salto de linea
+        print("\n")
 
-    # Objeto para la creacion de la tabla
-    table = Table(title="Tabla de informacion")
-    table.add_column("Cantidad estudiantes")
-    table.add_column("Cantidad estudiantes masculino")
-    table.add_column("Cantidad estudiantes femenino")
-    table.add_column("Porcentaje de estudiantes masculinos")
-    table.add_column("Porcentaje de estudiantes femeninos")
-    table.add_column("Porcentaje total de estudiantes")
+        # Objeto para la creacion de la tabla
+        table = Table(title="Tabla de informacion")
+        table.add_column("Cantidad estudiantes")
+        table.add_column("Cantidad estudiantes masculino")
+        table.add_column("Cantidad estudiantes femenino")
+        table.add_column("Porcentaje de estudiantes masculinos")
+        table.add_column("Porcentaje de estudiantes femeninos")
+        table.add_column("Porcentaje total de estudiantes")
 
-    table.add_row(
-        str(total_estudiantes),
-        str(estudiantes_masculino),
-        str(estudiantes_femenino),
-        str(porcentaje_em),
-        str(porcentaje_ef),
-        str(porcentaje_total_estudiantes),
-    )
+        table.add_row(
+            str(total_estudiantes),
+            str(estudiantes_masculino),
+            str(estudiantes_femenino),
+            str(porcentaje_em),
+            str(porcentaje_ef),
+            str(porcentaje_total_estudiantes),
+        )
 
-    console.print(table)
+        console.print(table)
+    else:
+        print("** no hay estudiantes registrados **\n".upper())
 
 
 def menu_colegio() -> int:

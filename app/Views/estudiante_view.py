@@ -23,6 +23,8 @@ def registro_de_datos() -> dict | None:
     Return:
         (dict): toma registro de los datos del usuario ingresado
     """
+    estudiante = EstudianteController()
+
     continuar: bool = True
     while continuar:
         # Limpieza de la consola
@@ -30,78 +32,76 @@ def registro_de_datos() -> dict | None:
         print("** registro datos del estudiante **".upper())
 
         cedula: str = ""  # Ingreso de la cedula del estudiante
-        existe_estudiante: bool = False  # Existe estudiante
-        while (
-            not cedula.isdigit()
-            or int(cedula) < 0
-            or len(cedula) != 8
-            or existe_estudiante
-        ):
+        validar_cedula: str = ""  # Validacion de la cedula
+        while True:
             # Validando si el cedula es un numero positivo
             cedula = input("\nIngrese cedula: ")
+            validar_cedula = estudiante.validar_cedula(cedula)
 
-            # Comprueba si el estudiante existe
-            estudiante = EstudianteController()
-            existe_estudiante: bool = estudiante.buscar_estudiante(cedula)
-
-            if not cedula.isdigit() or int(cedula) < 0 or len(cedula) != 8:
+            if validar_cedula:
                 # Muestra error si la cedula no es un numero positivo de 8 digitos
-                print("\nError: el dato tiene que ser un numero positivo de 8 digitos")
-
-            if existe_estudiante:
-                # Muestra error si el estudiante ya existe
-                print("\nError: el estudiante ya existe")
-                continuar = Validaciones().continuar_operacion()
-                if not continuar:
-                    break
+                print(f"\n{validar_cedula}")
+                if validar_cedula == "Error: La cedula ya existe":
+                    continuar = Validaciones().continuar_operacion()
+                    if not continuar:
+                        break
+            else:
+                break
         if not continuar:
             # Si no se desea continuar
             break
 
         # Ingreso nombre del estudiante
         nombre: str = ""
-        while not nombre.isalpha():
+        validar_nombre: str = ""
+        while True:
             # Validando si el nombre es un caracter
-            nombre = input("\nIngrese nombre: ")
+            nombre = input("\nIngrese nombre: ").strip()
+            validar_nombre = estudiante.validar_nombre(nombre)
 
-            if not nombre:
-                print("\nError: el dato tiene que ser caracter")
+            if validar_nombre:
+                print(f"\n{validar_nombre}")
+            else:
+                break
 
         # Ingreso edad del estudiante
         edad: int = ""
-        while not edad.isdigit() or int(edad) not in range(10, 18):
+        validar_edad: str = ""
+        while True:
             # Validando si el edad es un numero positivo o esta entre 10 y 17 años
             edad = input("\nIngrese edad: ")
+            validar_edad = estudiante.validar_edad(edad)
 
-            if not edad.isdigit() or int(edad) < 0:
-                print("\nError: el dato tiene que ser un numero positivo")
-            if int(edad) not in range(10, 18):
-                print("\nError: el estudiante tiene que tener entre 10 y 17 años")
+            if validar_edad:
+                # Muestra error si la edad no es un numero positivo o esta entre 10 y 17 años
+                print(f"\n{validar_edad}")
                 continuar = Validaciones().continuar_operacion()
                 if not continuar:
                     break
+            else:
+                break
         if not continuar:
             # Si no se desea continuar
             break
 
         # Ingreso genero del estudiante
         genero: str = ""
-        while genero not in ["femenino", "masculino"]:
+        validar_genero: str = ""
+        while True:
             # Validando si el genero es femenino o masculino
             genero = input("\nIngrese genero (femenino/masculino): ")
+            validar_genero = estudiante.validar_genero(genero)
 
-            if genero not in ["femenino", "masculino"]:
-                print("\nError: el dato tiene que ser femenino o masculino")
+            if validar_genero:
+                # Muestra error si el genero no es femenino o masculino
+                print(f"\n{validar_genero}")
+            else:
+                break
 
         # Ingreso curso del estudiante
         curso: str = ""
-        while not curso.isalpha() or curso not in [
-            "matematicas",
-            "ciencias",
-            "historia",
-            "geografia",
-            "biologia",
-        ]:
+        validar_curso: str = ""
+        while True:
             # Validando si el genero es femenino o masculino
             print(
                 "\nCursos del colegio:",
@@ -113,24 +113,27 @@ def registro_de_datos() -> dict | None:
                 sep="\n",
             )
             curso = input("Ingrese el curso que esta el estudiante: ")
+            validar_curso = estudiante.validar_curso(curso)
 
-            if not curso.isalpha() or curso not in [
-                "matematicas",
-                "ciencias",
-                "historia",
-                "geografia",
-                "biologia",
-            ]:
-                print("\nError: el dato no es caracter o no es un curso del colegio")
+            if validar_curso:
+                # Muestra error si el curso no es femenino o masculino
+                print(f"\n{validar_curso}")
+            else:
+                break
 
         # Ingresa nota del estudiante
         nota: str = ""
-        while not nota.isdigit() or float(nota) < 0 or float(nota) > 10:
+        validar_nota: str = ""
+        while True:
             # Validando si el genero es femenino o masculino
             nota = input("\nIngrese nota del estudiante (0-10): ")
+            validar_nota = estudiante.validar_nota(nota)
 
-            if not nota.isdigit() or float(nota) < 0 or float(nota) > 10:
-                print("\nError: el dato tiene que ser un numero positivo entre 0 y 10")
+            if validar_nota:
+                # Muestra error si el genero no es femenino o masculino
+                print(f"\n{validar_nota}")
+            else:
+                break
 
         keywords = {
             "cedula": int(cedula),

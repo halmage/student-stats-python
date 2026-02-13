@@ -42,6 +42,106 @@ class EstudianteController(PersonaController, NotaController):
         else:
             return "La tabla ya existe"
 
+    def eliminar_tabla_estudiantes(self) -> None:
+        """
+        Elimina la tabla de estudiantes
+
+        Returns:
+            str: mensaje de estado
+        """
+        estudiante = EstudianteTable()
+        if estudiante.eliminar_tabla_estudiantes():
+            return "Tabla eliminada exitosamente"
+
+    def validar_cedula(self, cedula: str) -> None:
+        """
+        Valida la cedula del estudiante
+
+        Returns:
+            (bool): True si la cedula es valida, False si no
+        """
+
+        if self.buscar_estudiante(cedula):
+            return "Error: La cedula ya existe"
+
+        if cedula == "":
+            return "Error: La cedula no puede estar vacia"
+
+        if not cedula.isdigit() or int(cedula) < 0 or len(cedula) != 8:
+            return "Error: La cedula tiene que ser un numero positivo de 8 digitos"
+
+    def validar_nombre(self, nombre: str) -> None:
+        """
+        Valida el nombre del estudiante
+
+        Returns:
+            (bool): True si el nombre es valido, False si no
+        """
+        if nombre == "":
+            return "Error: El nombre no puede estar vacio"
+        if not nombre.isalpha():
+            return "Error: El nombre tiene que ser un caracter"
+        if len(nombre) < 3:
+            return "Error: El nombre debe tener al menos 3 caracteres"
+        if len(nombre) > 20:
+            return "Error: El nombre debe tener menos de 20 caracteres"
+
+    def validar_edad(self, edad: str) -> None:
+        """
+        Valida la edad del estudiante
+
+        Returns:
+            (bool): True si la edad es valida, False si no
+        """
+        if edad == "":
+            return "La edad no puede estar vacia"
+        if not edad.isdigit():
+            return "La edad debe ser un numero positivo"
+        if int(edad) < 0 or int(edad) not in range(10, 18):
+            return "La edad debe ser un numero positivo entre 10 y 17"
+
+    def validar_genero(self, genero: str) -> None:
+        """
+        Valida el genero del estudiante
+
+        Returns:
+            (bool): True si el genero es valido, False si no
+        """
+        if genero == "":
+            return "El genero no puede estar vacio"
+        elif genero not in ["femenino", "masculino"]:
+            return "El genero debe ser Masculino o Femenino"
+
+    def validar_curso(self, curso: str) -> None:
+        """
+        Valida el curso del estudiante
+
+        Returns:
+            (bool): True si el curso es valido, False si no
+        """
+        if curso == "":
+            return "El curso no puede estar vacio"
+        elif not curso.isalpha() or curso not in [
+            "matematicas",
+            "ciencias",
+            "historia",
+            "geografia",
+            "biologia",
+        ]:
+            return "\nError: el dato no es caracter o no es un curso del colegio"
+
+    def validar_nota(self, nota: float) -> None:
+        """
+        Valida la nota del estudiante
+
+        Returns:
+            (bool): True si la nota es valida, False si no
+        """
+        if nota == "":
+            return "La nota no puede estar vacia"
+        elif not nota.isdigit() or float(nota) < 0 or float(nota) > 10:
+            return "La nota debe ser un numero entre 0 y 10"
+
     def crear_estudiante(self) -> None:
         """
         Ingresa un estudiante a la base de datos
@@ -57,6 +157,7 @@ class EstudianteController(PersonaController, NotaController):
         Return:
             (bool): True si se creo el estudiante, False si no
         """
+
         kwargs = {
             "cedula": self.cedula,
             "nombre": self.nombre,
@@ -171,7 +272,7 @@ class EstudianteController(PersonaController, NotaController):
                 for datos_estudiante in datos_estudiantes
             ]
         else:
-            return None
+            return ""
 
     def estudiantes_femenino(self) -> list:
         """
@@ -196,7 +297,7 @@ class EstudianteController(PersonaController, NotaController):
                 for datos_estudiante in datos_estudiantes
             ]
         else:
-            return None
+            return ""
 
     def cantidad_estudiantes(self) -> int:
         """
@@ -206,7 +307,10 @@ class EstudianteController(PersonaController, NotaController):
             (int): suma de estudiantes femenino y masculino
         """
         estudiante = EstudianteTable()
-        return len(estudiante.mostrar_estudiantes())
+        if estudiante.mostrar_estudiantes():
+            return len(estudiante.mostrar_estudiantes())
+        else:
+            return 0
 
     def porcentaje_estudiantes_masculinos(self) -> float:
         """

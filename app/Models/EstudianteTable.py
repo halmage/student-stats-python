@@ -39,6 +39,20 @@ class EstudianteTable:
             self.conexion.close()
             return False
 
+    def eliminar_tabla_estudiantes(self) -> None:
+        """
+        Eliminar la tabla 'estudiantes'
+        """
+        try:
+            self.conexion.execute(
+                """
+                drop table estudiantes
+                """
+            )
+            self.conexion.close()
+        except sqlite3.OperationalError:
+            self.conexion.close()
+
     def crear_estudiante(self, **kwargs) -> None:
         """
         Insertar un estudiante en la tabla 'estudiantes'
