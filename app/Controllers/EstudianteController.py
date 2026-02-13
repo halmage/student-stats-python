@@ -110,7 +110,7 @@ class EstudianteController(PersonaController, NotaController):
         if genero == "":
             return "El genero no puede estar vacio"
         elif genero not in ["femenino", "masculino"]:
-            return "El genero debe ser Masculino o Femenino"
+            return "El genero debe ser femenino o masculino"
 
     def validar_curso(self, curso: str) -> None:
         """

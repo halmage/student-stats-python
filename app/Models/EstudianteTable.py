@@ -3,13 +3,20 @@ Tabla EstudianteTable: tabla de base de datos para el control de estudiantes
 """
 
 import sqlite3
+import os
+
+# Ruta relativa
+ARCHIVO_RELATIVO: str = "colegio.db"
+
+# Convertir a absoluta
+RUTA_ABSOLUTA: str = os.path.abspath(ARCHIVO_RELATIVO)
 
 
 class EstudianteTable:
     """Clase EstudianteTable"""
 
-    def __init__(self):
-        with sqlite3.connect("app/Models/colegio.db") as conexion:
+    def __init__(self) -> None:
+        with sqlite3.connect(RUTA_ABSOLUTA) as conexion:
             self.conexion = conexion
 
     def crear_tabla_estudiantes(self) -> bool:
@@ -33,10 +40,9 @@ class EstudianteTable:
                                     nota float not null
                                 )"""
             )
-            self.conexion.close()
+            self.conexion.commit()
             return True
         except sqlite3.OperationalError:
-            self.conexion.close()
             return False
 
     def eliminar_tabla_estudiantes(self) -> None:
@@ -49,9 +55,9 @@ class EstudianteTable:
                 drop table estudiantes
                 """
             )
-            self.conexion.close()
+            self.conexion.commit()
         except sqlite3.OperationalError:
-            self.conexion.close()
+            return []
 
     def crear_estudiante(self, **kwargs) -> None:
         """
@@ -80,9 +86,8 @@ class EstudianteTable:
                 ),
             )
             self.conexion.commit()
-            self.conexion.close()
         except sqlite3.OperationalError:
-            self.conexion.close()
+            return []
 
     def buscar_estudiante(self, cedula: str) -> tuple:
         """
@@ -101,7 +106,7 @@ class EstudianteTable:
 
             return cursor.fetchone()
         except sqlite3.OperationalError:
-            self.conexion.close()
+            return []
 
     def mostrar_estudiantes(self) -> list:
         """
@@ -119,7 +124,7 @@ class EstudianteTable:
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
-            self.conexion.close()
+            return []
 
     def eliminar_estudiante(self, cedula: str) -> None:
         """
@@ -136,9 +141,8 @@ class EstudianteTable:
                 (cedula,),
             )
             self.conexion.commit()
-            self.conexion.close()
         except sqlite3.OperationalError:
-            self.conexion.close()
+            return []
 
     def estudiantes_masculino(self) -> int:
         """
@@ -156,7 +160,7 @@ class EstudianteTable:
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
-            self.conexion.close()
+            return []
 
     def estudiantes_femenino(self) -> int:
         """
@@ -174,7 +178,7 @@ class EstudianteTable:
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
-            self.conexion.close()
+            return []
 
     def estudiantes_reprobados(self) -> int:
         """
@@ -192,7 +196,7 @@ class EstudianteTable:
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
-            self.conexion.close()
+            return []
 
     def estudiantes_aprobados(self) -> int:
         """
@@ -210,4 +214,4 @@ class EstudianteTable:
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
-            self.conexion.close()
+            return []

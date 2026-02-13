@@ -150,7 +150,9 @@ def main() -> None:
                 gestion_base_de_datos()
             case 4:
                 # Salir
-                print("\n** Gracias por usar el sistema **\n")
+                # Limpieza de la consola
+                os.system("clear")
+                print("** Gracias por usar el sistema **\n")
                 input("Presione enter para continuar...")
                 os.system("clear")
                 break
