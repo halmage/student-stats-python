@@ -408,6 +408,140 @@ def mostrar_estudiantes_reprobados() -> None:
         break
 
 
+def menu_curso() -> str:
+    """Menu de opciones del sistema
+
+    Returns:
+        str: curso seleccionado
+    """
+    # Ingreso curso del estudiante
+    curso: str = ""
+    validar_curso: str = ""
+    while True:
+        # Validando si el genero es femenino o masculino
+        print(
+            "** MENU CURSOS **",
+            "matematicas",
+            "ciencias",
+            "historia",
+            "geografia",
+            "biologia",
+            sep="\n",
+        )
+        curso = input("Ingrese el curso que quieres generar el reporte: ")
+        validar_curso = EstudianteController().validar_curso(curso)
+
+        if validar_curso:
+            # Muestra error si el curso no es femenino o masculino
+            print(f"{validar_curso}\n")
+            input("Presione enter para continuar...")
+            os.system("clear")
+        else:
+            break
+    return curso
+
+
+def mostrar_estudiantes_por_curso() -> None:
+    """
+    Muestra los estudiantes por curso
+    Returns:
+        None
+    """
+    while True:
+        # Limpieza de la consola
+        os.system("clear")
+        # Llama a la clase estudiante
+        estudiantes = EstudianteController()
+        # Muestra todos los estudiantes por curso
+        curso = menu_curso()
+        datos_estudiantes = estudiantes.mostrar_estudiantes_por_curso(curso)
+        if datos_estudiantes:
+            # Limpieza de la consola
+            os.system("clear")
+            # Muestra todos los estudiantes por curso
+            text = "Datos de los estudiantes por curso"
+            tabla_informacion_estudiante(datos_estudiantes, text, False)
+        else:
+            print(f"\n** No se encontraron estudiantes en el curso {curso.upper()} **")
+        break
+
+
+def menu_mostrar_estudiantes() -> int:
+    """
+    Menu para mostrar estudiantes
+
+    Returns:
+        int: opcion seleccionada
+    """
+    # Limpieza de la consola
+    os.system("clear")
+    opcion = 0
+    while opcion not in (1, 2, 3, 4, 5, 6, 7):
+        try:
+            # Limpieza de la consola
+            os.system("clear")
+            print(
+                "** MENU MOSTRAR ESTUDIANTES **",
+                "1. Mostrar todos los estudiantes",
+                "2. Mostrar estudiantes masculinos",
+                "3. Mostrar estudiantes femeninos",
+                "4. Mostrar estudiantes aprobados",
+                "5. Mostrar estudiantes reprobados",
+                "6. Mostrar estudiantes por curso",
+                "7. Salir",
+                sep="\n",
+            )
+            opcion = int(input("ingrese una opcion: "))
+
+            if opcion not in (1, 2, 3, 4, 5, 6, 7):
+                print("\nPor favor, ingrese una opcion valida.")
+                input("Presione enter para continuar...")
+                os.system("clear")
+        except ValueError:
+            print("\nPor favor, ingrese una opcion valida.")
+            input("Presione enter para continuar...")
+            os.system("clear")
+    return opcion
+
+
+def mostrar_datos_estudiantes() -> None:
+    """
+    Muestra los datos de los estudiantes
+
+    Returns:
+        None
+    """
+    while True:
+        # Limpieza de la consola
+        os.system("clear")
+        match menu_mostrar_estudiantes():
+            case 1:
+                # Mostrar todos los estudiantes
+                mostrar_estudiantes()
+            case 2:
+                # Mostrar estudiantes masculinos
+                mostrar_estudiantes_masculino()
+            case 3:
+                # Mostrar estudiantes femeninos
+                mostrar_estudiantes_femenino()
+            case 4:
+                # Mostrar estudiantes aprobados
+                mostrar_estudiantes_aprobados()
+            case 5:
+                # Mostrar estudiantes reprobados
+                mostrar_estudiantes_reprobados()
+            case 6:
+                # Mostrar estudiantes por curso
+                while True:
+                    mostrar_estudiantes_por_curso()
+                    continuar = Validaciones().continuar_operacion()
+                    if not continuar:
+                        break
+            case 7:
+                # Salir
+                break
+
+
 def eliminar_estudiante() -> None:
     """
     Elimina un estudiante de la tabla 'estudiantes'
@@ -460,74 +594,6 @@ def eliminar_estudiante() -> None:
         continuar = Validaciones().continuar_operacion()
         if not continuar:
             break
-
-
-def menu_mostrar_estudiantes() -> int:
-    """
-    Menu para mostrar estudiantes
-
-    Returns:
-        int: opcion seleccionada
-    """
-    # Limpieza de la consola
-    os.system("clear")
-    opcion = 0
-    while opcion not in (1, 2, 3, 4, 5, 6):
-        try:
-            # Limpieza de la consola
-            os.system("clear")
-            print(
-                "** MENU MOSTRAR ESTUDIANTES **",
-                "1. Mostrar todos los estudiantes",
-                "2. Mostrar estudiantes masculinos",
-                "3. Mostrar estudiantes femeninos",
-                "4. Mostrar estudiantes aprobados",
-                "5. Mostrar estudiantes reprobados",
-                "6. Salir",
-                sep="\n",
-            )
-            opcion = int(input("ingrese una opcion: "))
-
-            if opcion not in (1, 2, 3, 4, 5, 6):
-                print("\nPor favor, ingrese una opcion valida.")
-                input("Presione enter para continuar...")
-                os.system("clear")
-        except ValueError:
-            print("\nPor favor, ingrese una opcion valida.")
-            input("Presione enter para continuar...")
-            os.system("clear")
-    return opcion
-
-
-def mostrar_datos_estudiantes() -> None:
-    """
-    Muestra los datos de los estudiantes
-
-    Returns:
-        None
-    """
-    while True:
-        # Limpieza de la consola
-        os.system("clear")
-        match menu_mostrar_estudiantes():
-            case 1:
-                # Mostrar todos los estudiantes
-                mostrar_estudiantes()
-            case 2:
-                # Mostrar estudiantes masculinos
-                mostrar_estudiantes_masculino()
-            case 3:
-                # Mostrar estudiantes femeninos
-                mostrar_estudiantes_femenino()
-            case 4:
-                # Mostrar estudiantes aprobados
-                mostrar_estudiantes_aprobados()
-            case 5:
-                # Mostrar estudiantes reprobados
-                mostrar_estudiantes_reprobados()
-            case 6:
-                # Salir
-                break
 
 
 def menu_estudiante() -> int:
