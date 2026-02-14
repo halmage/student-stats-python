@@ -47,16 +47,16 @@ class NotaController:
             return "La nota debe ser un numero entre 0 y 10"
         return None
 
-    def evaluacion(self, nota: float) -> str:
+    def evaluacion(self, nota) -> str:
         """Evaluacion de la nota
 
         Returns:
             str: evaluacion de la nota
         """
-        if self.nota >= 5 and self.nota <= 7:
+        if 5 >= nota <= 7:
             return "Aprobado"
-        if self.nota > 7:
+        if nota > 7:
             return "Excelente"
-        if self.nota < 5:
+        if nota < 5:
             return "Reprobado"
         return None
