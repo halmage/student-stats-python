@@ -127,6 +127,28 @@ class EstudianteTable:
         except sqlite3.OperationalError:
             return []
 
+    def mostrar_estudiantes_por_curso(self, curso: str) -> list:
+        """
+        Mostrar todos los estudiantes de la tabla 'estudiantes'
+
+        Args:
+            curso (str): Curso del estudiante
+
+        Returns:
+            list: lista de estudiantes
+        """
+        try:
+            cursor = self.conexion.execute(
+                """
+                select * from estudiantes where curso = ?
+                """,
+                (curso,),
+            )
+
+            return cursor.fetchall()
+        except sqlite3.OperationalError:
+            return []
+
     def eliminar_estudiante(self, cedula: str) -> None:
         """
         Eliminar un estudiante de la tabla 'estudiantes'

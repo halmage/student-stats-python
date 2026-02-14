@@ -8,10 +8,10 @@ Descripcion: Cuerpo principal del programa
 import os
 
 # Importacion de vistas
-from app.Controllers.estudiante_controller import EstudianteController
-from app.Views.estudiante_view import main as menu_estudiante
+from app.Views.reportes_view import main as menu_reportes
 from app.Views.colegio_view import main as menu_colegio
-
+from app.Views.estudiante_view import main as menu_estudiante
+from app.Controllers.estudiante_controller import EstudianteController
 
 # Limpieza de la consola
 os.system("clear")
@@ -24,7 +24,7 @@ def menu() -> int:
         int: opcion seleccionada
     """
     opcion = 0
-    while opcion not in (1, 2, 3, 4):
+    while opcion not in (1, 2, 3, 4, 5):
         try:
             # Limpieza de la consola
             os.system("clear")
@@ -32,13 +32,14 @@ def menu() -> int:
                 "** SISTEMA DE CONTROL ESCOLAR **",
                 "1. Modulo de estudiantes",
                 "2. Modulo de estadisticas colegial",
-                "3. Gestion de base de datos",
-                "4. Salir",
+                "3. Modulo de reportes",
+                "4. Gestion de base de datos",
+                "5. Salir",
                 sep="\n",
             )
             opcion = int(input("ingrese una opcion: "))
 
-            if opcion not in (1, 2, 3, 4):
+            if opcion not in (1, 2, 3, 4, 5):
                 print("\nPor favor, ingrese una opcion valida.")
                 input("Presione enter para continuar...")
                 os.system("clear")
@@ -146,9 +147,12 @@ def main() -> None:
                 # Menu de colegio
                 menu_colegio()
             case 3:
+                # Menu de reportes
+                menu_reportes()
+            case 4:
                 # Gestion de base de datos
                 gestion_base_de_datos()
-            case 4:
+            case 5:
                 # Salir
                 # Limpieza de la consola
                 os.system("clear")

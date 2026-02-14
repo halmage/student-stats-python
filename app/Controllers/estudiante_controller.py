@@ -133,6 +133,30 @@ class EstudianteController(PersonaController, NotaController):
             ]
         return None
 
+    def mostrar_estudiantes_por_curso(self, curso: str) -> list[dict] | None:
+        """
+        Muestra todos los estudiantes de la tabla 'estudiantes'
+
+        Return:
+            (list[dict]): lista de estudiantes
+        """
+        estudiante = EstudianteTable()
+        datos_estudiantes = estudiante.mostrar_estudiantes_por_curso(curso)
+
+        if datos_estudiantes:
+            return [
+                {
+                    "cedula": datos_estudiante[1],
+                    "nombre": datos_estudiante[2],
+                    "edad": datos_estudiante[3],
+                    "genero": datos_estudiante[4],
+                    "curso": datos_estudiante[5],
+                    "nota": datos_estudiante[6],
+                }
+                for datos_estudiante in datos_estudiantes
+            ]
+        return None
+
     def eliminar_estudiante(self, cedula: str) -> None:
         """
         Elimina un estudiante de la tabla 'estudiantes'
