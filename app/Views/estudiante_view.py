@@ -19,6 +19,9 @@ from app.Controllers.estadistica_controller import EstadisticaController
 from app.package.validaciones import Validaciones
 
 
+console = Console()
+
+
 def registro_de_datos() -> dict | None:
     """
     Ingreso de datos por el usuario
@@ -45,12 +48,14 @@ def registro_de_datos() -> dict | None:
                 # Muestra error si la cedula no es un numero positivo de 8 digitos
 
                 if validar_cedula is None:
-                    print("\nError: La cedula ya existe")
+                    console.print(
+                        "\n[bold red]❌ Error: La cedula ya existe [/bold red]"
+                    )
                     continuar = Validaciones().continuar_operacion()
                     if not continuar:
                         break
                 else:
-                    print(f"\n{validar_cedula}")
+                    console.print(f"\n[bold red]❌ {validar_cedula}[/bold red]")
             else:
                 break
         if not continuar:
@@ -66,7 +71,7 @@ def registro_de_datos() -> dict | None:
             validar_nombre = estudiante.validar_nombre(nombre)
 
             if validar_nombre:
-                print(f"\n{validar_nombre}")
+                console.print(f"\n[bold red]❌ {validar_nombre}[/bold red]")
             else:
                 break
 
@@ -80,7 +85,7 @@ def registro_de_datos() -> dict | None:
 
             if validar_edad:
                 # Muestra error si la edad no es un numero positivo o esta entre 10 y 17 años
-                print(f"\n{validar_edad}")
+                console.print(f"\n[bold red]❌ {validar_edad}[/bold red]")
                 continuar = Validaciones().continuar_operacion()
                 if not continuar:
                     break
@@ -100,7 +105,7 @@ def registro_de_datos() -> dict | None:
 
             if validar_genero:
                 # Muestra error si el genero no es femenino o masculino
-                print(f"\n{validar_genero}")
+                console.print(f"\n[bold red]❌ {validar_genero}[/bold red]")
             else:
                 break
 
@@ -123,7 +128,7 @@ def registro_de_datos() -> dict | None:
 
             if validar_curso:
                 # Muestra error si el curso no es femenino o masculino
-                print(f"\n{validar_curso}")
+                console.print(f"\n[bold red]❌ {validar_curso}[/bold red]")
             else:
                 break
 
@@ -137,7 +142,7 @@ def registro_de_datos() -> dict | None:
 
             if validar_nota:
                 # Muestra error si el genero no es femenino o masculino
-                print(f"\n{validar_nota}")
+                console.print(f"\n[bold red]❌ {validar_nota}[/bold red]")
             else:
                 break
 
@@ -189,7 +194,9 @@ def tabla_informacion_estudiante(
             str(datos["cedula"]),
             datos["nombre"],
             str(datos["edad"]),
-            datos["genero"],
+            "[#FFC0CB]femenino[/#FFC0CB]"
+            if datos["genero"] == "femenino"
+            else "[#0000FF]masculino[/#0000FF]",
             datos["curso"],
             str(datos["nota"]),
         )
@@ -200,7 +207,9 @@ def tabla_informacion_estudiante(
                 str(dato["cedula"]),
                 dato["nombre"],
                 str(dato["edad"]),
-                dato["genero"],
+                "[#FFC0CB]femenino[/#FFC0CB]"
+                if dato["genero"] == "femenino"
+                else "[#0000FF]masculino[/#0000FF]",
                 dato["curso"],
                 str(dato["nota"]),
             )
@@ -242,7 +251,7 @@ def mostrar_estudiante() -> None:
                 tabla_informacion_estudiante(datos_estudiante, text, True)
 
             else:
-                print("\n** No se encontro el estudiante **")
+                console.print("\n[bold red]❌ No se encontro el estudiante[/bold red]")
 
         # Pregunta si desea buscar otro estudiante
         continuar = Validaciones().continuar_operacion()
@@ -276,7 +285,7 @@ def mostrar_estudiantes() -> None:
             text = "Datos de los estudiantes"
             tabla_informacion_estudiante(datos_estudiantes, text, False)
         else:
-            print("\n** No se encontraron estudiantes **")
+            console.print("\n[bold red]❌ No se encontraron estudiantes[/bold red]")
 
         input("\nPresione enter para continuar...")
         break
@@ -308,7 +317,9 @@ def mostrar_estudiantes_masculino() -> None:
             text = "Datos de los estudiantes masculinos"
             tabla_informacion_estudiante(datos_estudiantes, text, False)
         else:
-            print("\n** No se encontraron estudiantes masculinos **")
+            console.print(
+                "\n[bold red]❌ No se encontraron estudiantes masculinos[/bold red]"
+            )
 
         input("\nPresione enter para continuar...")
         break
@@ -340,7 +351,9 @@ def mostrar_estudiantes_femenino() -> None:
             text = "Datos de los estudiantes femeninos"
             tabla_informacion_estudiante(datos_estudiantes, text, False)
         else:
-            print("\n** No se encontraron estudiantes femeninos **")
+            console.print(
+                "\n[bold red]❌ No se encontraron estudiantes femeninos[/bold red]"
+            )
 
         input("\nPresione enter para continuar...")
         break
@@ -372,7 +385,9 @@ def mostrar_estudiantes_aprobados() -> None:
             text = "Datos de los estudiantes aprobados"
             tabla_informacion_estudiante(datos_estudiantes, text, False)
         else:
-            print("\n** No se encontraron estudiantes aprobados **")
+            console.print(
+                "\n[bold red]❌ No se encontraron estudiantes aprobados[/bold red]"
+            )
 
         input("\nPresione enter para continuar...")
         break
@@ -404,7 +419,9 @@ def mostrar_estudiantes_reprobados() -> None:
             text = "Datos de los estudiantes reprobados"
             tabla_informacion_estudiante(datos_estudiantes, text, False)
         else:
-            print("\n** No se encontraron estudiantes reprobados **")
+            console.print(
+                "\n[bold red]❌ No se encontraron estudiantes reprobados[/bold red]"
+            )
 
         input("\nPresione enter para continuar...")
         break
@@ -435,7 +452,7 @@ def menu_curso() -> str:
 
         if validar_curso:
             # Muestra error si el curso no es femenino o masculino
-            print(f"{validar_curso}\n")
+            console.print(f"[bold red]❌ {validar_curso}[/bold red]\n")
             input("Presione enter para continuar...")
             os.system("clear")
         else:
@@ -464,7 +481,9 @@ def mostrar_estudiantes_por_curso() -> None:
             text = "Datos de los estudiantes por curso"
             tabla_informacion_estudiante(datos_estudiantes, text, False)
         else:
-            print(f"\n** No se encontraron estudiantes en el curso {curso.upper()} **")
+            console.print(
+                f"\n[bold red]❌ No se encontraron estudiantes en el curso {curso.upper()}[/bold red]\n"
+            )
         break
 
 
@@ -496,11 +515,15 @@ def menu_mostrar_estudiantes() -> int:
             opcion = int(input("ingrese una opcion: "))
 
             if opcion not in (1, 2, 3, 4, 5, 6, 7):
-                print("\nPor favor, ingrese una opcion valida.")
+                console.print(
+                    "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+                )
                 input("Presione enter para continuar...")
                 os.system("clear")
         except ValueError:
-            print("\nPor favor, ingrese una opcion valida.")
+            console.print(
+                "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+            )
             input("Presione enter para continuar...")
             os.system("clear")
     return opcion
@@ -565,7 +588,8 @@ def eliminar_estudiante() -> None:
         validar_cedula: str = estudiante.validar_cedula(cedula)
 
         if validar_cedula:
-            print(f"\n{validar_cedula}")
+            # Muestra error si el cedula no es un numero positivo
+            console.print(f"[bold red]❌ {validar_cedula}[/bold red]")
             input("\nPresione enter para continuar...")
             continue
 
@@ -591,7 +615,7 @@ def eliminar_estudiante() -> None:
                 break
             # Salir de la operacion eliminar estudiante
             break
-        print("\n** No se encontro el estudiante **")
+        console.print("\n[bold red]❌ No se encontro el estudiante[/bold red]")
         # Pregunta si desea buscar otro estudiante
         continuar = Validaciones().continuar_operacion()
         if not continuar:
@@ -622,11 +646,15 @@ def menu_estudiante() -> int:
             opcion = int(input("ingrese una opcion: "))
 
             if opcion not in (1, 2, 3, 4, 5):
-                print("\nPor favor, ingrese una opcion valida.")
+                console.print(
+                    "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+                )
                 input("Presione enter para continuar...")
                 os.system("clear")
         except ValueError:
-            print("\nPor favor, ingrese una opcion valida.")
+            console.print(
+                "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+            )
             input("Presione enter para continuar...")
             os.system("clear")
     return opcion
