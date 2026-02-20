@@ -10,12 +10,16 @@ DESCRIPCIÓN: Cuerpo principal del programa
 
 # Importacion de librerias
 import os
+import time
 
 # Importacion de vistas
 from app.Views.reportes_view import main as menu_reportes
 from app.Views.colegio_view import main as menu_colegio
 from app.Views.estudiante_view import main as menu_estudiante
 from app.Views.gestion_base_de_datos_view import main as menu_gestion_base_de_datos
+
+# Importacion de validaciones
+from app.Controllers.estudiante_controller import EstudianteController
 
 # Limpieza de la consola
 os.system("clear")
@@ -59,8 +63,20 @@ def main() -> None:
     Funcion principal del programa
     """
     while True:
-        # Limpieza de la consola
-        os.system("clear")
+        if not os.path.exists("colegio.db"):
+            # Limpieza de la consola
+            os.system("clear")
+            print("** Iniciando sistema **")
+            time.sleep(2)
+            os.system("clear")
+            print("** Creando base de datos **")
+            base_de_datos = EstudianteController()
+            base_de_datos.crear_tabla_estudiantes()
+            time.sleep(2)
+            os.system("clear")
+            print("** Base de datos creada exitosamente **")
+            time.sleep(2)
+            os.system("clear")
 
         # Menu principal
         match menu():

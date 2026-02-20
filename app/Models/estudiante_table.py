@@ -12,10 +12,10 @@ import sqlite3
 import os
 
 # Ruta relativa
-ARCHIVO_RELATIVO: str = "colegio.db"
+NOMBRE_BASE_DE_DATOS: str = "colegio.db"
 
 # Convertir a absoluta
-RUTA_ABSOLUTA: str = os.path.abspath(ARCHIVO_RELATIVO)
+RUTA_ABSOLUTA: str = os.path.abspath(NOMBRE_BASE_DE_DATOS)
 
 
 class EstudianteTable:
@@ -56,14 +56,11 @@ class EstudianteTable:
         Eliminar la tabla 'estudiantes'
         """
         try:
-            self.conexion.execute(
-                """
-                drop table estudiantes
-                """
-            )
-            self.conexion.commit()
-        except sqlite3.OperationalError:
-            return []
+            nombre_archivo = "colegio.db"
+            if os.path.exists(nombre_archivo):
+                os.remove(nombre_archivo)
+        except Exception as e:
+            print(f"\nError al intentar eliminar la base de datos: {e}")
 
     def crear_estudiante(self, **kwargs) -> None:
         """

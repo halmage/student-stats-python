@@ -50,13 +50,23 @@ def visualizar_estadisticas_de_estudiantes() -> None:
         print("\n")
 
         # Objeto para la creacion de la tabla
-        table = Table(title="Tabla de informacion")
-        table.add_column("Cantidad estudiantes")
-        table.add_column("Cantidad estudiantes masculino")
-        table.add_column("Cantidad estudiantes femenino")
-        table.add_column("Porcentaje de estudiantes masculinos")
-        table.add_column("Porcentaje de estudiantes femeninos")
-        table.add_column("Porcentaje total de estudiantes")
+        table = Table(title="📊 TABLA DE INFORMACION")
+        table.add_column("Cantidad estudiantes", justify="center", style="cyan")
+        table.add_column(
+            "Cantidad estudiantes masculino", justify="center", style="magenta"
+        )
+        table.add_column(
+            "Cantidad estudiantes femenino", justify="center", style="green"
+        )
+        table.add_column(
+            "Porcentaje de estudiantes masculinos", justify="center", style="yellow"
+        )
+        table.add_column(
+            "Porcentaje de estudiantes femeninos", justify="center", style="blue"
+        )
+        table.add_column(
+            "Porcentaje total de estudiantes", justify="center", style="red"
+        )
 
         table.add_row(
             str(total_estudiantes),

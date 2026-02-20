@@ -8,6 +8,8 @@ DESCRIPCIÓN: Contiene la clase Validaciones, responsable de manejar
 la lógica de confirmación de operaciones y validación de entradas del usuario.
 """
 
+import app.Models
+
 
 class Validaciones:
     """Clase que representa las validaciones"""
