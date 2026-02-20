@@ -1,7 +1,9 @@
-"""estudiante
-Autor: Hugo Zorrilla
-Fecha: 20/01/2026
-Descripcion: Vista del estudiante
+"""
+MÓDULO: estudiante_view.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN: Maneja la interfaz de usuario para el registro y consulta
+de estudiantes.
 """
 
 # Importacion de librerias

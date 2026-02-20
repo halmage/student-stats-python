@@ -1,9 +1,23 @@
-"""Clase EstadisticaController
+"""
+Clase EstadisticaController
 
-Autor: Hugo Zorrilla
-Fecha: 20/01/2026
-Descripcion: Clase EstadisticaController que representa a un estadistica
-con sus atributos y metodos heredados de la clase persona
+MÓDULO: estadistica_controller.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN:
+Es una clase llamada EstadisticaController que representa a una
+estadística con sus atributos y métodos heredados de la clase EstudianteController.
+
+* Heredar de EstudianteController para manejar los datos básicos del estudiante.
+
+* Realizar el cálculo del promedio general de las notas de los estudiantes
+registrados en la base de datos.
+
+* Determinar el porcentaje de estudiantes que han aprobado o reprobado
+según sus calificaciones.
+
+* Evaluar el estado académico individual (Aprobado/Reprobado) de un estudiante
+basándose en su nota.
 """
 
 # Importaciones clases heredadas
@@ -12,7 +26,7 @@ from app.Models.estudiante_table import EstudianteTable
 
 
 class EstadisticaController(EstudianteController):
-    """Clase que representa a un estadistica"""
+    """Clase que representa el controlador de estadísticas"""
 
     def __init__(
         self,
@@ -24,6 +38,7 @@ class EstadisticaController(EstudianteController):
         nota: float = 0.0,
     ):
         EstudianteController.__init__(self, cedula, nombre, edad, genero, curso, nota)
+        self.estudiante_table = EstudianteTable()
 
     def estudiantes_femenino(self) -> list:
         """
@@ -32,8 +47,7 @@ class EstadisticaController(EstudianteController):
         Return:
             (list): lista de estudiantes femeninos
         """
-        estudiante = EstudianteTable()
-        datos_estudiantes = estudiante.estudiantes_femenino()
+        datos_estudiantes = self.estudiante_table.estudiantes_femenino()
 
         if datos_estudiantes:
             return [
@@ -56,9 +70,8 @@ class EstadisticaController(EstudianteController):
         Return:
             (int): suma de estudiantes femenino y masculino
         """
-        estudiante = EstudianteTable()
-        if estudiante.mostrar_estudiantes():
-            return len(estudiante.mostrar_estudiantes())
+        if self.estudiante_table.mostrar_estudiantes():
+            return len(self.estudiante_table.mostrar_estudiantes())
         return 0
 
     def porcentaje_estudiantes_masculinos(self) -> float:
@@ -100,8 +113,7 @@ class EstadisticaController(EstudianteController):
         Return:
             (list): lista de estudiantes reprobados
         """
-        estudiante = EstudianteTable()
-        datos_estudiantes = estudiante.estudiantes_reprobados()
+        datos_estudiantes = self.estudiante_table.estudiantes_reprobados()
 
         if datos_estudiantes:
             return [
@@ -124,8 +136,7 @@ class EstadisticaController(EstudianteController):
         Return:
             (list): lista de estudiantes aprobados
         """
-        estudiante = EstudianteTable()
-        datos_estudiantes = estudiante.estudiantes_aprobados()
+        datos_estudiantes = self.estudiante_table.estudiantes_aprobados()
 
         if datos_estudiantes:
             return [

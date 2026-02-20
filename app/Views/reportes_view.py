@@ -1,7 +1,9 @@
-"""reportes
-Autor: Hugo Zorrilla
-Fecha: 14/02/2026
-Descripcion: Vista de los reportes
+"""
+MÓDULO: reportes_view.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN: Maneja la interfaz de usuario para la generación de reportes
+             estadísticos y la exportación de datos.
 """
 
 import os

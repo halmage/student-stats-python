@@ -1,9 +1,26 @@
-"""Clase EstudianteController
+"""
+Clase EstudianteController
 
-Autor: Hugo Zorrilla
-Fecha: 20/01/2026
-Descripcion: Clase EstudianteController que representa a un estudiante
-con sus atributos y metodos heredados de la clase persona
+MÓDULO: estudiante_controller.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN:
+Es una clase llamada EstudianteController que representa a un estudiante
+con sus atributos y métodos heredados de la clase persona.
+
+* Herencia Múltiple: Hereda de PersonaController y NotaController
+para integrar los datos personales con la información académica.
+
+* Gestión de Datos: Se encarga de la comunicación con la capa de
+datos a través de la clase EstudianteTable.
+
+* Operaciones de Tabla: Incluye métodos para crear y eliminar la
+tabla de estudiantes en la base de datos.
+
+* Gestión de Estudiantes: Permite realizar operaciones para crear,
+buscar, mostrar y eliminar registros de estudiantes, así como
+filtrar listas específicas (por ejemplo, estudiantes masculinos
+o por curso).
 """
 
 # Importaciones clases heredadas

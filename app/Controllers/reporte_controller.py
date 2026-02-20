@@ -1,10 +1,30 @@
 """
 Clase ReporteController
 
-Autor: Hugo Zorrilla
-Fecha: 20/01/2026
-Descripcion: Clase ReporteController que representa a un reporte
-con sus atributos y metodos heredados de la clase EstudianteController y EstadisticaController
+MÓDULO: reporte_controller.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN:
+Es una clase llamada ReporteController que se encarga de la generación y
+gestión de informes externos basados en los datos del sistema.
+
+* Herencia Múltiple Estratégica: Hereda de EstadisticaController y
+EstudianteController para tener acceso tanto a los métodos de cálculo
+estadístico como a la gestión de la lista de alumnos.
+
+* Generación de Reportes en CSV: Implementa la lógica para extraer la
+información de la base de datos y convertirla a un formato de valores
+separados por comas (CSV), permitiendo que los datos sean legibles en
+herramientas como Excel.
+
+* Gestión de Almacenamiento: Define y gestiona la ruta de salida de los
+archivos (usualmente en una carpeta de activos o reportes), asegurando
+que los informes se guarden de manera organizada.
+
+* Automatización de Análisis: Permite exportar de forma masiva el estado
+académico de los estudiantes (promedios, aprobados y reprobados),
+facilitando la toma de decisiones administrativas sin necesidad de
+consultar el sistema manualmente.
 """
 
 import os

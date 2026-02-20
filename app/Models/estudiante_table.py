@@ -1,5 +1,11 @@
 """
-Tabla EstudianteTable: tabla de base de datos para el control de estudiantes
+Clase EstudianteTable
+
+MÓDULO: estudiante_table.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN: Define la creación y el esquema de la tabla 'estudiantes'.
+             Implementa las restricciones de integridad (Unique, Not Null).
 """
 
 import sqlite3

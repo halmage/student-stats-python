@@ -1,7 +1,11 @@
 """
-Autor: Hugo Zorrilla
-Fecha: 20/01/2026
-Descripcion: Clase validaciones
+Clase Validaciones
+
+MÓDULO: validaciones.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN: Contiene la clase Validaciones, responsable de manejar
+la lógica de confirmación de operaciones y validación de entradas del usuario.
 """
 
 

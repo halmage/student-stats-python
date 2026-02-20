@@ -1,5 +1,9 @@
 """
-Vista de gestion de la base de datos
+MÓDULO: gestion_base_de_datos_view.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN: Interfaz de usuario (Consola/Web) para la administración del
+esquema de base de datos. Permite la inicialización y mantenimiento de tablas.
 """
 
 import os

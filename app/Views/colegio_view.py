@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Porcentaje de estudiante
-Autor: Hugo Zorrilla
-Descripcion: Vista de colegio
+"""
+MÓDULO: colegio_view.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN: Maneja la interfaz de usuario para la gestión del colegio,
+             incluyendo la visualización de estadísticas y el menú principal.
 """
 
 import os

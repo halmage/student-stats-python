@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Porcentaje de estudiante
-Autor: Hugo Zorrilla
-Descripcion: Cuerpo principal del programa
+"""
+Porcentaje de estudiante
+
+MÓDULO: main.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN: Cuerpo principal del programa
 """
 
 # Importacion de librerias

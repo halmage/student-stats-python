@@ -1,7 +1,28 @@
-"""Clase persona
-Autor: Hugo Zorrilla
-Fecha: 20/01/2026
-Descripcion: Clase persona que representa a una persona con sus atributos y metodos
+"""
+Clase PersonaController
+
+MÓDULO: persona_controller.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN:
+Es una clase llamada PersonaController que representa a una
+persona con sus atributos básicos de identificación.
+
+
+* Definición de Atributos Base: Establece los datos fundamentales
+que toda persona en el sistema debe tener: cédula, nombre, apellido, edad y género.
+
+* Lógica de Validación de Identidad: Implementa métodos para asegurar
+que la cédula sea un dato numérico y que el género corresponda a las opciones
+válidas (Masculino o Femenino).
+
+* Validación de Datos Personales: Incluye lógica para verificar que la edad
+esté en un rango lógico (de 0 a 100 años) y que el nombre cumpla con el formato
+de texto adecuado.
+
+* Clase Base para Herencia: Sirve como el pilar fundamental del cual heredan otros
+controladores (como EstudianteController y EstadisticaController), permitiendo que
+el sistema mantenga la consistencia de los datos personales en todos sus módulos.
 """
 
 

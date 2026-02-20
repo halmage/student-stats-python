@@ -1,9 +1,27 @@
 """
-Clase Nota
-Autor: Hugo Zorrilla
-Fecha: 21/01/2026
-Descripcion: Clase Nota que representa a una nota con sus atributos
-y metodos
+Clase NotaController
+
+MÓDULO: nota_controller.py
+PROYECTO: Sistema de Gestión Estadística Estudiantil
+AUTOR: Hugo Zorrilla
+DESCRIPCIÓN:
+Es una clase llamada NotaController que representa a una nota con
+sus atributos de curso y calificación.
+
+* Gestión de Datos Académicos: Define la estructura básica para
+manejar la información de los cursos y las notas numéricas de los estudiantes.
+
+* Validación de Cursos: Implementa la lógica para verificar que los
+cursos ingresados pertenezcan a las opciones permitidas por el sistema
+(como matemáticas, ciencias, historia, geografía o biología).
+
+* Validación de Calificaciones: Asegura que las notas ingresadas estén
+dentro de un rango válido (de 0 a 10) y que cumplan con el formato
+numérico correcto.
+
+* Soporte de Herencia: Funciona como una clase base que es heredada
+por otros controladores (como EstudianteController) para integrar la
+lógica de calificaciones en el perfil completo del alumno.
 """
 
 
