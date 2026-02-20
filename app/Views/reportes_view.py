@@ -2,8 +2,9 @@
 MÓDULO: reportes_view.py
 PROYECTO: Sistema de Gestión Estadística Estudiantil
 AUTOR: Hugo Zorrilla
-DESCRIPCIÓN: Maneja la interfaz de usuario para la generación de reportes
-             estadísticos y la exportación de datos.
+DESCRIPCIÓN:
+    Maneja la interfaz de usuario para la generación de reportes
+    estadísticos y la exportación de datos.
 """
 
 import os

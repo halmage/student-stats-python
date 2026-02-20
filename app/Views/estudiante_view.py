@@ -176,13 +176,13 @@ def tabla_informacion_estudiante(
     """
     # Muestra el estudiante
     console = Console()
-    table = Table(title=text, show_lines=True)
-    table.add_column("Cedula", justify="center")
-    table.add_column("Nombre", justify="center")
-    table.add_column("Edad", justify="center")
-    table.add_column("Genero", justify="center")
-    table.add_column("Curso", justify="center")
-    table.add_column("Nota", justify="center")
+    table = Table(title="📊 LISTADO DE ESTUDIANTES")
+    table.add_column("Cedula", justify="right", style="cyan")
+    table.add_column("Nombre", style="magenta")
+    table.add_column("Edad", justify="center", style="green")
+    table.add_column("Genero", justify="center", style="yellow")
+    table.add_column("Curso", justify="center", style="blue")
+    table.add_column("Nota", justify="center", style="red")
     if rango_busqueda:
         # mostrar informacion de un solo estudiante (diccionario)
         table.add_row(
