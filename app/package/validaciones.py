@@ -9,10 +9,14 @@ la lógica de confirmación de operaciones y validación de entradas del usuario
 """
 
 import app.Models
+from rich.console import Console
 
 
 class Validaciones:
     """Clase que representa las validaciones"""
+
+    def __init__(self):
+        self.console = Console()
 
     def continuar_operacion(self) -> bool:
         """
@@ -26,7 +30,9 @@ class Validaciones:
             continuar = input("\n¿Desea continuar? (si/no): ").lower().strip()
 
             if continuar not in ["si", "no", "s", "n"]:
-                print("\nError: el dato tiene que ser si o no")
+                self.console.print(
+                    "\n[bold red]❌ Error: el dato tiene que ser si o no[/bold red]"
+                )
 
         if continuar in ("si", "s"):
             # Si el usuario desea continuar
@@ -49,7 +55,9 @@ class Validaciones:
             )
 
             if continuar not in ["si", "no", "s", "n"]:
-                print("\nError: el dato tiene que ser si o no")
+                self.console.print(
+                    "\n[bold red]❌ Error: el dato tiene que ser si o no[/bold red]"
+                )
 
         if continuar in ("si", "s"):
             # Si el usuario desea eliminar
