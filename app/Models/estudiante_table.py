@@ -173,12 +173,12 @@ class EstudianteTable:
         except sqlite3.OperationalError:
             return []
 
-    def estudiantes_masculino(self) -> int:
+    def estudiantes_masculino(self) -> list:
         """
         Cantidad de estudiantes masculino
 
         Return:
-            (int): cantidad de estudiantes masculino
+            (list): cantidad de estudiantes masculino
         """
         try:
             cursor = self.conexion.execute(
@@ -191,12 +191,12 @@ class EstudianteTable:
         except sqlite3.OperationalError:
             return []
 
-    def estudiantes_femenino(self) -> int:
+    def estudiantes_femenino(self) -> list:
         """
         Cantidad de estudiantes femenino
 
         Return:
-            (int): cantidad de estudiantes femenino
+            (list): cantidad de estudiantes femenino
         """
         try:
             cursor = self.conexion.execute(
@@ -209,12 +209,12 @@ class EstudianteTable:
         except sqlite3.OperationalError:
             return []
 
-    def estudiantes_reprobados(self) -> int:
+    def estudiantes_reprobados(self) -> list:
         """
         Cantidad de estudiantes reprobados
 
         Return:
-            (int): cantidad de estudiantes reprobados
+            (list): cantidad de estudiantes reprobados
         """
         try:
             cursor = self.conexion.execute(
@@ -227,12 +227,12 @@ class EstudianteTable:
         except sqlite3.OperationalError:
             return []
 
-    def estudiantes_aprobados(self) -> int:
+    def estudiantes_aprobados(self) -> list:
         """
         Cantidad de estudiantes aprobados
 
         Return:
-            (int): cantidad de estudiantes aprobados
+            (list): cantidad de estudiantes aprobados
         """
         try:
             cursor = self.conexion.execute(
