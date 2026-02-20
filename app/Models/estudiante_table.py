@@ -4,8 +4,9 @@ Clase EstudianteTable
 MÓDULO: estudiante_table.py
 PROYECTO: Sistema de Gestión Estadística Estudiantil
 AUTOR: Hugo Zorrilla
-DESCRIPCIÓN: Define la creación y el esquema de la tabla 'estudiantes'.
-             Implementa las restricciones de integridad (Unique, Not Null).
+DESCRIPCIÓN:
+        Define la creación y el esquema de la tabla 'estudiantes'.
+        Implementa las restricciones de integridad (Unique, Not Null).
 """
 
 import sqlite3
