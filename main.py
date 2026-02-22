@@ -11,6 +11,7 @@ DESCRIPCIÓN: Cuerpo principal del programa
 # Importacion de librerias
 import os
 import time
+from rich.console import Console
 
 # Importacion de vistas
 from app.Views.reportes_view import main as menu_reportes
@@ -23,6 +24,7 @@ from app.Controllers.estudiante_controller import EstudianteController
 
 # Limpieza de la consola
 os.system("clear")
+console = Console()
 
 
 def menu() -> int:
@@ -36,8 +38,8 @@ def menu() -> int:
         try:
             # Limpieza de la consola
             os.system("clear")
-            print(
-                "** SISTEMA DE CONTROL ESCOLAR **",
+            console.print(
+                "🎓 SISTEMA DE CONTROL ESCOLAR",
                 "1. Modulo de estudiantes",
                 "2. Modulo de estadisticas colegial",
                 "3. Modulo de reportes",
@@ -48,11 +50,15 @@ def menu() -> int:
             opcion = int(input("ingrese una opcion: "))
 
             if opcion not in (1, 2, 3, 4, 5):
-                print("\nPor favor, ingrese una opcion valida.")
+                console.print(
+                    "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+                )
                 input("Presione enter para continuar...")
                 os.system("clear")
         except ValueError:
-            print("\nPor favor, ingrese una opcion valida.")
+            console.print(
+                "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+            )
             input("Presione enter para continuar...")
             os.system("clear")
     return opcion
@@ -66,15 +72,18 @@ def main() -> None:
         if not os.path.exists("colegio.db"):
             # Limpieza de la consola
             os.system("clear")
-            print("** Iniciando sistema **")
+            console.print("⏳  Iniciando sistema")
             time.sleep(2)
             os.system("clear")
-            print("** Creando base de datos **")
+            console.print("🛠️  Creando base de datos")
             base_de_datos = EstudianteController()
             base_de_datos.crear_tabla_estudiantes()
             time.sleep(2)
             os.system("clear")
-            print("** Base de datos creada exitosamente **")
+            console.print("✅  Base de datos creada exitosamente")
+            time.sleep(2)
+            os.system("clear")
+            console.print("🚀  Sistema listo para usar")
             time.sleep(2)
             os.system("clear")
 
@@ -96,7 +105,7 @@ def main() -> None:
                 # Salir
                 # Limpieza de la consola
                 os.system("clear")
-                print("** Gracias por usar el sistema **\n")
+                console.print("\n[bold green]👋 Gracias por usar el sistema\n")
                 input("Presione enter para continuar...")
                 os.system("clear")
                 break

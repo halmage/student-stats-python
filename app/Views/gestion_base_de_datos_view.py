@@ -8,6 +8,8 @@ esquema de base de datos. Permite la inicialización y mantenimiento de tablas.
 
 import os
 
+from app.Views.colegio_view import console
+
 # Importacion de controladores
 from app.Controllers.estudiante_controller import EstudianteController
 
@@ -18,7 +20,10 @@ def crear_base_de_datos() -> None:
     """
     estudiante = EstudianteController()
     estado_database = estudiante.crear_tabla_estudiantes()
-    print(f"\n** {estado_database} **\n")
+    if estado_database == "Base de datos creada exitosamente":
+        console.print(f"\n[bold green]{'✅'} {estado_database} [/bold green]\n")
+    else:
+        console.print(f"\n[bold yellow]{'⚠️'}  {estado_database} [/bold yellow]\n")
     input("Presione enter para continuar...")
 
 
@@ -28,7 +33,9 @@ def eliminar_base_de_datos() -> None:
     """
     estudiante = EstudianteController()
     estudiante.eliminar_tabla_estudiantes()
-    print("\n** Tabla eliminada exitosamente **\n")
+    console.print(
+        "\n[bold green]✅ Base de datos eliminada exitosamente [/bold green]\n"
+    )
     input("Presione enter para continuar...")
 
 
@@ -43,8 +50,8 @@ def menu() -> int:
         try:
             # Limpieza de la consola
             os.system("clear")
-            print(
-                "** GESTION DE BASE DE DATOS **",
+            console.print(
+                "🛢  GESTION DE BASE DE DATOS",
                 "1. Crear base de datos",
                 "2. Eliminar base de datos",
                 "3. Salir",
@@ -72,21 +79,23 @@ def gestion_base_de_datos() -> None:
             case 1:
                 # Limpieza de la consola
                 os.system("clear")
-                print("** CREAR BASE DE DATOS **")
+                console.print("🛢  CREAR BASE DE DATOS")
                 print(crear_base_de_datos())
             case 2:
                 # Limpieza de la consola
                 os.system("clear")
-                print("** ELIMINAR BASE DE DATOS **\n")
+                console.print(
+                    "⚠️ [bold yellow] ELIMINARAS LA BASE DE DATOS [/bold yellow]⚠️\n"
+                )
                 confirmacion = input(
-                    "¿Estas seguro de eliminar la base de datos? (s/n): "
+                    "¿Estas seguro de eliminar la base de datos 🛢? (s/n): "
                 )
                 if confirmacion == "s":
                     print(eliminar_base_de_datos())
                 else:
                     # Limpieza de la consola
                     os.system("clear")
-                    print("** Operacion cancelada **\n")
+                    console.print("[bold red]❌ Operacion cancelada [/bold red]\n")
                     input("Presione enter para continuar...")
             case 3:
                 break

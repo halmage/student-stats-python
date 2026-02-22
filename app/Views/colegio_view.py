@@ -4,7 +4,7 @@ MÓDULO: colegio_view.py
 PROYECTO: Sistema de Gestión Estadística Estudiantil
 AUTOR: Hugo Zorrilla
 DESCRIPCIÓN: Maneja la interfaz de usuario para la gestión del colegio,
-             incluyendo la visualización de estadísticas y el menú principal.
+incluyendo la visualización de estadísticas y el menú principal.
 """
 
 import os
@@ -12,6 +12,9 @@ from rich.console import Console
 from rich.table import Table
 
 from app.Controllers.estadistica_controller import EstadisticaController
+
+# Objeto para imprimir tabla
+console = Console()
 
 
 def visualizar_estadisticas_de_estudiantes() -> None:
@@ -42,9 +45,6 @@ def visualizar_estadisticas_de_estudiantes() -> None:
 
         # Porcentaje total de estudiantes en el colegio
         porcentaje_total_estudiantes: float = estudiante.porcentaje_total_estudiantes()
-
-        # Objeto para imprimir tabla
-        console = Console()
 
         # Salto de linea
         print("\n")
@@ -94,8 +94,8 @@ def menu_colegio() -> int:
         try:
             # Limpieza de la consola
             os.system("clear")
-            print(
-                "** MENU COLEGIO **",
+            console.print(
+                "📋 MENU COLEGIO",
                 "1. Visualizar estadisticas de estudiantes",
                 "2. Salir",
                 sep="\n",
@@ -103,11 +103,15 @@ def menu_colegio() -> int:
             opcion = int(input("ingrese una opcion: "))
 
             if opcion not in (1, 2):
-                print("\nPor favor, ingrese una opcion valida.")
+                console.print(
+                    "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+                )
                 input("Presione enter para continuar...")
                 os.system("clear")
         except ValueError:
-            print("\nPor favor, ingrese una opcion valida.")
+            console.print(
+                "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+            )
             input("Presione enter para continuar...")
             os.system("clear")
     return opcion

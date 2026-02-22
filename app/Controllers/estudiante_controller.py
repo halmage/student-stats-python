@@ -55,8 +55,8 @@ class EstudianteController(PersonaController, NotaController):
         """
         estudiante = EstudianteTable()
         if estudiante.crear_tabla_estudiantes():
-            return "Tabla creada exitosamente"
-        return "La tabla ya existe"
+            return "Base de datos creada exitosamente"
+        return "La base de datos ya existe"
 
     def eliminar_tabla_estudiantes(self) -> str:
         """
