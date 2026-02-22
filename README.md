@@ -28,7 +28,6 @@ Este es un sistema robusto de gestión académica desarrollado en **Python**, di
 │   └── package/        # Módulos transversales (Validaciones)
 ├── main.py             # Punto de entrada de la aplicación
 ├── requirements.txt    # Dependencias del proyecto
-└── colegio.db          # Base de datos local
 ```
 
 ## ⚙️ Instalación y Uso
