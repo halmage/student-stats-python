@@ -1,20 +1,46 @@
-# Sistema de Gestión de Estadísticas Estudiantiles (Python + SQLite)
+# Sistema de Gestión y Análisis Estadístico Estudiantil 📊🐍
 
-Este proyecto es una herramienta de análisis de datos escolares desarrollada en **Python** , diseñada para proporcionar métricas clave sobre el cuerpo estudiantil de una institución educativa. Utiliza **SQLite** como motor de base de datos para garantizar una gestión de la información ligera, eficiente y sin necesidad de configuraciones complejas de servidor.
+Este es un sistema robusto de gestión académica desarrollado en **Python**, diseñado bajo estándares de ingeniería de software para automatizar el control de registros, notas y estadísticas escolares. El proyecto utiliza una arquitectura **MVC (Modelo-Vista-Controlador)** para garantizar la escalabilidad y el mantenimiento del código.
 
-### 📋 Características Principales
+## 🚀 Características Principales
 
-El programa permite procesar la información de los alumnos para obtener los siguientes indicadores de forma automatizada:
+- **Arquitectura Profesional:** Implementación del patrón de diseño MVC para una separación clara de responsabilidades.
+- **Persistencia de Datos:** Gestión eficiente de información mediante **SQLite**, con creación automática de tablas y manejo de consultas relacionales.
+- **Lógica de Negocio Avanzada:** Uso de **Programación Orientada a Objetos (POO)** con herencia múltiple para una estructura de clases eficiente (Persona -> Estudiante).
+- **Análisis Estadístico:** Generación de reportes automáticos sobre el rendimiento académico de los estudiantes.
+- **Interfaz Elegante:** Uso de la librería `Rich` para una experiencia de usuario superior en la consola (tablas, colores y formato).
 
-- **Reporte de Rendimiento Académico:** Filtrado y visualización detallada de la lista completa de estudiantes **aprobados** y **reprobados** .
-- **Persistencia de Datos:** Integración con una base de datos local SQLite para el almacenamiento seguro y consulta rápida de los registros.
-
-### 🚀 Tecnologías Utilizadas
+## 🛠️ Tecnologías Utilizadas
 
 - **Lenguaje:** Python 3.x
-- **Base de Datos:** SQLite3
-- **Librerías:** `sqlite3` (para la gestión de la BD) y lógica de programación estructurada para el cálculo de porcentajes.
+- **Base de Datos:** SQLite
+- **Librerías:** - `sqlite3` (Persistencia)
+  - `rich` (Interfaz de usuario y formato)
+- **Control de Versiones:** Git & GitHub
 
-### ⚙️ Funcionamiento General
+## 📂 Estructura del Proyecto
 
-El sistema se conecta a la base de datos `colegio.db`, extrae los registros de la tabla de estudiantes y aplica funciones de agregación para determinar las estadísticas. La lógica de aprobación se basa en los criterios de calificación estándar definidos en el código fuente.
+```text
+├── app/
+│   ├── Controllers/    # Lógica de negocio (Persona, Estudiante, Estadísticas)
+│   ├── Models/         # Interacción con la base de datos (SQLite tables)
+│   ├── Views/          # Interfaz de usuario y menús
+│   └── package/        # Módulos transversales (Validaciones)
+├── main.py             # Punto de entrada de la aplicación
+├── requirements.txt    # Dependencias del proyecto
+└── colegio.db          # Base de datos local
+```
+
+## ⚙️ Instalación y Uso
+
+1. Clonar el repositorio: git clone [https://github.com/halmage/student-stats-python.git](https://github.com/halmage/student-stats-python.git)
+2. Instalar dependencias: pip install -r requirements.txt
+3. Ejecutar la aplicación: python main.py
+
+## 🛡️ Mejores Prácticas Aplicadas
+
+- **Clean Code:** Código documentado con _Docstrings_ y siguiendo convenciones de nombrado claras.
+- **Manejo de Excepciones:** Implementación de bloques `try-except` para prevenir cierres inesperados y gestionar errores de usuario.
+- **Modularización:** Proyecto dividido en paquetes y módulos para facilitar la colaboración y el testeo.
+
+**Desarrollado por [Hugo Zorrilla](https://www.google.com/search?q=https://www.linkedin.com/in/hugo-zorrilla-a642821b9)** _Analista Programador Backend | Especialista en Python & Laravel_
