@@ -10,22 +10,23 @@ incluyendo la visualización de estadísticas y el menú principal.
 import os
 from rich.console import Console
 from rich.table import Table
+import matplotlib.pyplot as plt
 
 from app.Controllers.estadistica_controller import EstadisticaController
 
 # Objeto para imprimir tabla
 console = Console()
 
+estudiante = EstadisticaController()
 
-def visualizar_estadisticas_de_estudiantes() -> None:
+
+def visualizar_tabla_de_estudiantes() -> None:
     """
     Visualiza la estadistica de estudiantes del colegio
     """
 
     # Limpieza de la consola
     os.system("clear")
-
-    estudiante = EstadisticaController()
 
     # Suma total de todos los de estudiantes del colegio
     total_estudiantes: int = estudiante.cantidad_estudiantes()
@@ -82,6 +83,85 @@ def visualizar_estadisticas_de_estudiantes() -> None:
         print("** no hay estudiantes registrados **\n".upper())
 
 
+def visualizar_grafico_de_estudiantes() -> None:
+    """
+    Visualiza la estadistica de estudiantes del colegio
+    """
+
+    # Limpieza de la consola
+    os.system("clear")
+
+    # Suma total de todos los de estudiantes del colegio
+    total_estudiantes: int = estudiante.cantidad_estudiantes()
+
+    if total_estudiantes > 0:
+        # Lista de estudiantes masculinos
+        estudiantes_masculino: int = len(estudiante.estudiantes_masculino())
+
+        # Lista de estudiantes femeninos
+        estudiantes_femenino: int = len(estudiante.estudiantes_femenino())
+
+        # Salto de linea
+        print("\n")
+
+        # Objeto para la creacion de la tabla
+        fig, ax = plt.subplots()
+
+        fruits: list[str] = ["Masculino", "Femenino"]
+        counts: list[int] = [estudiantes_masculino, estudiantes_femenino]
+        bar_labels: list[str] = ["Masculino", "Femenino"]
+        bar_colors: list[str] = ["tab:red", "tab:blue"]
+
+        ax.bar(fruits, counts, label=bar_labels, color=bar_colors)
+
+        ax.set_ylabel("Cantidad de estudiantes")
+        ax.set_title("Cantidad de estudiantes por genero")
+        ax.legend(title="Genero")
+
+        plt.show()
+    else:
+        console.print("[bold red]❌ No hay estudiantes registrados[/bold red]")
+
+
+def visualizar_grafico_de_porcentaje_de_estudiantes() -> None:
+    """
+    Visualiza el porcentaje de estudiantes del colegio
+    """
+    # Limpieza de la consola
+    os.system("clear")
+
+    # Suma total de todos los de estudiantes del colegio
+    total_estudiantes: int = estudiante.cantidad_estudiantes()
+
+    if total_estudiantes > 0:
+        # Porcentaje de estudiantes masculinos
+        porcentaje_em: float = round(estudiante.porcentaje_estudiantes_masculinos(), 2)
+
+        # Porcentaje de estudiantes femeninos
+        porcentaje_ef: float = round(estudiante.porcentaje_estudiantes_femeninos(), 2)
+
+        # Salto de linea
+        print("\n")
+
+        # Objeto para la creacion de la tabla
+        fig, ax = plt.subplots()
+
+        fruits: list[str] = ["Masculino", "Femenino"]
+        counts: list[int] = [porcentaje_em, porcentaje_ef]
+        bar_labels: list[str] = ["Masculino", "Femenino"]
+        bar_colors: list[str] = ["tab:red", "tab:blue"]
+
+        ax.bar(fruits, counts, label=bar_labels, color=bar_colors)
+
+        ax.set_ylabel("Porcentaje de estudiantes")
+        ax.set_title("Porcentaje de estudiantes por genero")
+        ax.legend(title="Genero")
+
+        plt.show()
+    else:
+        console.print("[bold red]❌ No hay estudiantes registrados[/bold red]")
+
+
 def menu_colegio() -> int:
     """
     Menu principal del estudiante
@@ -90,27 +170,29 @@ def menu_colegio() -> int:
         int: opcion seleccionada
     """
     opcion = 0
-    while opcion not in (1, 2):
+    while opcion not in (1, 2, 3, 4):
         try:
             # Limpieza de la consola
             os.system("clear")
             console.print(
                 "📋 MENU COLEGIO",
-                "1. Visualizar estadisticas de estudiantes",
-                "2. Salir",
+                "1. Visualizar tabla de estudiantes",
+                "2. Visualizar grafico de estudiantes",
+                "3. Visualizar grafico de porcentaje de estudiantes",
+                "4. Salir",
                 sep="\n",
             )
             opcion = int(input("ingrese una opcion: "))
 
-            if opcion not in (1, 2):
+            if opcion not in (1, 2, 3, 4):
                 console.print(
-                    "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+                    "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]\n"
                 )
                 input("Presione enter para continuar...")
                 os.system("clear")
         except ValueError:
             console.print(
-                "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]"
+                "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]\n"
             )
             input("Presione enter para continuar...")
             os.system("clear")
@@ -129,9 +211,17 @@ def main() -> None:
             # Menu principal
             case 1:
                 # Visualizar datos
-                visualizar_estadisticas_de_estudiantes()
+                visualizar_tabla_de_estudiantes()
                 input("Presione enter para continuar...")
             case 2:
+                # Visualizar grafico
+                visualizar_grafico_de_estudiantes()
+                input("Presione enter para continuar...")
+            case 3:
+                # Visualizar porcentaje
+                visualizar_grafico_de_porcentaje_de_estudiantes()
+                input("Presione enter para continuar...")
+            case 4:
                 # Salir
                 break
 
