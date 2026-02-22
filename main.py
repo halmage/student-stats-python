@@ -13,6 +13,7 @@ import os
 import time
 from rich.console import Console
 
+
 # Importacion de vistas
 from app.Views.reportes_view import main as menu_reportes
 from app.Views.colegio_view import main as menu_colegio

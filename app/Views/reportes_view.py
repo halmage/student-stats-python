@@ -10,6 +10,7 @@ DESCRIPCIÓN:
 import os
 from rich.console import Console
 
+
 from app.Controllers.reporte_controller import ReporteController
 from app.Controllers.estudiante_controller import EstudianteController
 
