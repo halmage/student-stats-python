@@ -9,6 +9,7 @@ incluyendo la visualización de estadísticas y el menú principal.
 
 import os
 from rich.console import Console
+from rich.table import Table
 import matplotlib.pyplot as plt
 
 from app.Controllers.estadistica_controller import EstadisticaController
@@ -19,7 +20,70 @@ console = Console()
 estudiante = EstadisticaController()
 
 
-def visualizar_estadisticas_de_estudiantes() -> None:
+def visualizar_tabla_de_estudiantes() -> None:
+    """
+    Visualiza la estadistica de estudiantes del colegio
+    """
+
+    # Limpieza de la consola
+    os.system("clear")
+
+    # Suma total de todos los de estudiantes del colegio
+    total_estudiantes: int = estudiante.cantidad_estudiantes()
+
+    if total_estudiantes > 0:
+        # Lista de estudiantes masculinos
+        estudiantes_masculino: int = len(estudiante.estudiantes_masculino())
+
+        # Lista de estudiantes femeninos
+        estudiantes_femenino: int = len(estudiante.estudiantes_femenino())
+
+        # Porcentaje de estudiantes masculinos
+        porcentaje_em: float = round(estudiante.porcentaje_estudiantes_masculinos(), 2)
+
+        # Porcentaje de estudiantes femeninos
+        porcentaje_ef: float = round(estudiante.porcentaje_estudiantes_femeninos(), 2)
+
+        # Porcentaje total de estudiantes en el colegio
+        porcentaje_total_estudiantes: float = estudiante.porcentaje_total_estudiantes()
+
+        # Salto de linea
+        print("\n")
+
+        # Objeto para la creacion de la tabla
+        table = Table(title="📊 TABLA DE INFORMACION")
+        table.add_column("Cantidad estudiantes", justify="center", style="cyan")
+        table.add_column(
+            "Cantidad estudiantes masculino", justify="center", style="magenta"
+        )
+        table.add_column(
+            "Cantidad estudiantes femenino", justify="center", style="green"
+        )
+        table.add_column(
+            "Porcentaje de estudiantes masculinos", justify="center", style="yellow"
+        )
+        table.add_column(
+            "Porcentaje de estudiantes femeninos", justify="center", style="blue"
+        )
+        table.add_column(
+            "Porcentaje total de estudiantes", justify="center", style="red"
+        )
+
+        table.add_row(
+            str(total_estudiantes),
+            str(estudiantes_masculino),
+            str(estudiantes_femenino),
+            str(porcentaje_em),
+            str(porcentaje_ef),
+            str(porcentaje_total_estudiantes),
+        )
+
+        console.print(table)
+    else:
+        print("** no hay estudiantes registrados **\n".upper())
+
+
+def visualizar_grafico_de_estudiantes() -> None:
     """
     Visualiza la estadistica de estudiantes del colegio
     """
@@ -59,7 +123,7 @@ def visualizar_estadisticas_de_estudiantes() -> None:
         console.print("[bold red]❌ No hay estudiantes registrados[/bold red]")
 
 
-def visualizar_porcentaje_de_estudiantes() -> None:
+def visualizar_grafico_de_porcentaje_de_estudiantes() -> None:
     """
     Visualiza el porcentaje de estudiantes del colegio
     """
@@ -106,20 +170,21 @@ def menu_colegio() -> int:
         int: opcion seleccionada
     """
     opcion = 0
-    while opcion not in (1, 2, 3):
+    while opcion not in (1, 2, 3, 4):
         try:
             # Limpieza de la consola
             os.system("clear")
             console.print(
                 "📋 MENU COLEGIO",
-                "1. Visualizar estadisticas de estudiantes",
-                "2. Visualizar porcentaje de estudiantes",
-                "3. Salir",
+                "1. Visualizar tabla de estudiantes",
+                "2. Visualizar grafico de estudiantes",
+                "3. Visualizar grafico de porcentaje de estudiantes",
+                "4. Salir",
                 sep="\n",
             )
             opcion = int(input("ingrese una opcion: "))
 
-            if opcion not in (1, 2, 3):
+            if opcion not in (1, 2, 3, 4):
                 console.print(
                     "\n[bold red]❌ Por favor, ingrese una opcion valida.[/bold red]\n"
                 )
@@ -146,13 +211,17 @@ def main() -> None:
             # Menu principal
             case 1:
                 # Visualizar datos
-                visualizar_estadisticas_de_estudiantes()
+                visualizar_tabla_de_estudiantes()
                 input("Presione enter para continuar...")
             case 2:
-                # Visualizar porcentaje
-                visualizar_porcentaje_de_estudiantes()
+                # Visualizar grafico
+                visualizar_grafico_de_estudiantes()
                 input("Presione enter para continuar...")
             case 3:
+                # Visualizar porcentaje
+                visualizar_grafico_de_porcentaje_de_estudiantes()
+                input("Presione enter para continuar...")
+            case 4:
                 # Salir
                 break
 
