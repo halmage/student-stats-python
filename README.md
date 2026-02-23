@@ -36,6 +36,34 @@ Este es un sistema robusto de gestión académica desarrollado en **Python**, di
 2. Instalar dependencias: pip install -r requirements.txt
 3. Ejecutar la aplicación: python main.py
 
+## 📸 Vista Previa del Sistema
+
+A continuación se detallan las funcionalidades principales del sistema a través de su interfaz de consola enriquecida:
+
+### 1. Menú Principal y Navegación
+
+![Menú Principal](screenshots/menu_principal.png)
+
+- **Descripción:** Interfaz de inicio diseñada con la librería `Rich`. Presenta un menú interactivo y organizado por colores que permite al usuario navegar fácilmente entre la gestión de alumnos, visualización de estadísticas, generación de reportes y administración de la base de datos SQLite.
+
+### 2. Gestión y Listado de Estudiantes
+
+![Listado de Estudiantes](screenshots/listado_estudiantes.png)
+
+- **Descripción:** Visualización de la persistencia de datos en tiempo real. Se muestra una tabla formateada con bordes y estilos profesionales donde se listan los datos: Cedula, Nombre, Edad, Genero Curso y Nota recuperados directamente desde la base de datos `colegio.db`.
+
+### 3. Panel de Análisis Estadístico
+
+![Panel de Estadísticas](screenshots/panel_estadisticas.png)
+
+- **Descripción:** Módulo que muestra de forma visual la cantidad de alumnos por su genero, demostrando la capacidad del sistema para procesar lógica de negocio.
+
+### 4. Generación de Reportes CSV
+
+![Exportación CSV](screenshots/exportacion_csv.png)
+
+- **Descripción:** Demostración de la capacidad de exportación del sistema. Se observa el proceso de creación de archivos físicos en la ruta `app/assets/reports/`, permitiendo que la información académica sea procesada externamente en herramientas como Excel.
+
 ## 🛡️ Mejores Prácticas Aplicadas
 
 - **Clean Code:** Código documentado con _Docstrings_ y siguiendo convenciones de nombrado claras.
