@@ -70,7 +70,7 @@ def menu() -> int:
     return opcion
 
 
-def gestion_base_de_datos() -> None:
+def main() -> None:
     """
     Operaciones de la base de datos
     """
@@ -99,10 +99,3 @@ def gestion_base_de_datos() -> None:
                     input("Presione enter para continuar...")
             case 3:
                 break
-
-
-def main() -> None:
-    """
-    Funcion principal del programa
-    """
-    gestion_base_de_datos()

@@ -45,7 +45,7 @@ def menu_curso() -> str:
 
         if validar_curso:
             # Muestra error si el curso no es femenino o masculino
-            console.print(f"[bold red]❌ {validar_curso}[/bold red]\n")
+            console.print(f"\n[bold red]❌ {validar_curso}[/bold red]\n")
             input("Presione enter para continuar...")
             os.system("clear")
         else:

@@ -49,7 +49,7 @@ class NotaController:
             "geografia",
             "biologia",
         ]:
-            return "\nError: el dato no es caracter o no es un curso del colegio"
+            return "Error: el dato no es caracter o no es un curso del colegio"
         return None
 
     def validar_nota(self, nota: float) -> str:

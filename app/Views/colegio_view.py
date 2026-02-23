@@ -80,7 +80,7 @@ def visualizar_tabla_de_estudiantes() -> None:
 
         console.print(table)
     else:
-        print("** no hay estudiantes registrados **\n".upper())
+        console.print("[bold red]❌ No hay estudiantes registrados[/bold red]\n")
 
 
 def visualizar_grafico_de_estudiantes() -> None:
@@ -107,12 +107,12 @@ def visualizar_grafico_de_estudiantes() -> None:
         # Objeto para la creacion de la tabla
         fig, ax = plt.subplots()
 
-        fruits: list[str] = ["Masculino", "Femenino"]
+        generos: list[str] = ["Masculino", "Femenino"]
         counts: list[int] = [estudiantes_masculino, estudiantes_femenino]
         bar_labels: list[str] = ["Masculino", "Femenino"]
-        bar_colors: list[str] = ["tab:red", "tab:blue"]
+        bar_colors: list[str] = ["tab:blue", "tab:red"]
 
-        ax.bar(fruits, counts, label=bar_labels, color=bar_colors)
+        ax.bar(generos, counts, label=bar_labels, color=bar_colors)
 
         ax.set_ylabel("Cantidad de estudiantes")
         ax.set_title("Cantidad de estudiantes por genero")
@@ -120,7 +120,7 @@ def visualizar_grafico_de_estudiantes() -> None:
 
         plt.show()
     else:
-        console.print("[bold red]❌ No hay estudiantes registrados[/bold red]")
+        console.print("[bold red]❌ No hay estudiantes registrados[/bold red]\n")
 
 
 def visualizar_grafico_de_porcentaje_de_estudiantes() -> None:
@@ -149,7 +149,7 @@ def visualizar_grafico_de_porcentaje_de_estudiantes() -> None:
         fruits: list[str] = ["Masculino", "Femenino"]
         counts: list[int] = [porcentaje_em, porcentaje_ef]
         bar_labels: list[str] = ["Masculino", "Femenino"]
-        bar_colors: list[str] = ["tab:red", "tab:blue"]
+        bar_colors: list[str] = ["tab:blue", "tab:red"]
 
         ax.bar(fruits, counts, label=bar_labels, color=bar_colors)
 
@@ -159,7 +159,7 @@ def visualizar_grafico_de_porcentaje_de_estudiantes() -> None:
 
         plt.show()
     else:
-        console.print("[bold red]❌ No hay estudiantes registrados[/bold red]")
+        console.print("[bold red]❌ No hay estudiantes registrados[/bold red]\n")
 
 
 def menu_colegio() -> int:

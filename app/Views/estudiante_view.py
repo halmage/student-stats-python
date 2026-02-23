@@ -694,7 +694,3 @@ def main() -> None:
             case 5:
                 # Salir
                 break
-
-
-if __name__ == "__main__":
-    main()

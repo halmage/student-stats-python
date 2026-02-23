@@ -12,19 +12,15 @@ DESCRIPCIÓN:
 import sqlite3
 import os
 
-# Ruta relativa
-NOMBRE_BASE_DE_DATOS: str = "colegio.db"
-
-# Convertir a absoluta
-RUTA_ABSOLUTA: str = os.path.abspath(NOMBRE_BASE_DE_DATOS)
-
 
 class EstudianteTable:
     """Clase EstudianteTable"""
 
-    def __init__(self) -> None:
-        with sqlite3.connect(RUTA_ABSOLUTA) as conexion:
-            self.conexion = conexion
+    # Ruta relativa
+    NOMBRE_BASE_DE_DATOS: str = "colegio.db"
+
+    # Convertir a absoluta
+    RUTA_ABSOLUTA: str = os.path.abspath(NOMBRE_BASE_DE_DATOS)
 
     def crear_tabla_estudiantes(self) -> bool:
         """
@@ -35,8 +31,9 @@ class EstudianteTable:
             bool: True si la tabla fue creada, False si ya existe
         """
         try:
-            self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                conexion.execute(
+                    """
                 create table estudiantes (
                                     id integer primary key autoincrement,
                                     cedula text not null,
@@ -46,8 +43,7 @@ class EstudianteTable:
                                     curso text not null,
                                     nota float not null
                                 )"""
-            )
-            self.conexion.commit()
+                )
             return True
         except sqlite3.OperationalError:
             return False
@@ -57,9 +53,8 @@ class EstudianteTable:
         Eliminar la tabla 'estudiantes'
         """
         try:
-            nombre_archivo = "colegio.db"
-            if os.path.exists(nombre_archivo):
-                os.remove(nombre_archivo)
+            if os.path.exists(self.NOMBRE_BASE_DE_DATOS):
+                os.remove(self.NOMBRE_BASE_DE_DATOS)
         except Exception as e:
             print(f"\nError al intentar eliminar la base de datos: {e}")
 
@@ -76,21 +71,21 @@ class EstudianteTable:
             nota (float): Nota del estudiante
         """
         try:
-            self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                conexion.execute(
+                    """
                 insert into estudiantes (cedula, nombre, edad, genero, curso, nota)
                 values (?, ?, ?, ?, ?, ?)
                 """,
-                (
-                    kwargs["cedula"],
-                    kwargs["nombre"],
-                    kwargs["edad"],
-                    kwargs["genero"],
-                    kwargs["curso"],
-                    kwargs["nota"],
-                ),
-            )
-            self.conexion.commit()
+                    (
+                        kwargs["cedula"],
+                        kwargs["nombre"],
+                        kwargs["edad"],
+                        kwargs["genero"],
+                        kwargs["curso"],
+                        kwargs["nota"],
+                    ),
+                )
         except sqlite3.OperationalError:
             return []
 
@@ -102,12 +97,13 @@ class EstudianteTable:
             cedula (str): Cedula del estudiante
         """
         try:
-            cursor = self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                cursor = conexion.execute(
+                    """
                 select * from estudiantes where cedula = ?
                 """,
-                (cedula,),
-            )
+                    (cedula,),
+                )
 
             return cursor.fetchone()
         except sqlite3.OperationalError:
@@ -121,11 +117,12 @@ class EstudianteTable:
             list: lista de estudiantes
         """
         try:
-            cursor = self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                cursor = conexion.execute(
+                    """
                 select * from estudiantes
                 """
-            )
+                )
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
@@ -142,12 +139,13 @@ class EstudianteTable:
             list: lista de estudiantes
         """
         try:
-            cursor = self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                cursor = conexion.execute(
+                    """
                 select * from estudiantes where curso = ?
                 """,
-                (curso,),
-            )
+                    (curso,),
+                )
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
@@ -161,13 +159,13 @@ class EstudianteTable:
             cedula (str): Cedula del estudiante
         """
         try:
-            self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                conexion.execute(
+                    """
                 delete from estudiantes where cedula = ?
                 """,
-                (cedula,),
-            )
-            self.conexion.commit()
+                    (cedula,),
+                )
         except sqlite3.OperationalError:
             return []
 
@@ -179,11 +177,12 @@ class EstudianteTable:
             (list): cantidad de estudiantes masculino
         """
         try:
-            cursor = self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                cursor = conexion.execute(
+                    """
                 select * from estudiantes where genero = 'masculino'
                 """
-            )
+                )
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
@@ -197,11 +196,12 @@ class EstudianteTable:
             (list): cantidad de estudiantes femenino
         """
         try:
-            cursor = self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                cursor = conexion.execute(
+                    """
                 select * from estudiantes where genero = 'femenino'
                 """
-            )
+                )
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
@@ -215,11 +215,12 @@ class EstudianteTable:
             (list): cantidad de estudiantes reprobados
         """
         try:
-            cursor = self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                cursor = conexion.execute(
+                    """
                 select * from estudiantes where nota < 5
                 """
-            )
+                )
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
@@ -233,11 +234,12 @@ class EstudianteTable:
             (list): cantidad de estudiantes aprobados
         """
         try:
-            cursor = self.conexion.execute(
-                """
+            with sqlite3.connect(self.RUTA_ABSOLUTA) as conexion:
+                cursor = conexion.execute(
+                    """
                 select * from estudiantes where nota >= 5
                 """
-            )
+                )
 
             return cursor.fetchall()
         except sqlite3.OperationalError:
